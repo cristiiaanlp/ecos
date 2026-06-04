@@ -844,7 +844,7 @@ function closeWin(){ document.getElementById("winOverlay").classList.remove("act
 function shareText(r){
   const star="★".repeat(r.stars)+"☆".repeat(3-r.stars);
   const head=r.custom?"ECOS · Nivel compartido":(r.daily?"ECOS · Reto del día":"ECOS · Nivel "+(r.idx+1));
-  return `${head}  ${star}\n${"⟲".repeat(r.timelines-1)||"—"}  ${r.timelines} ecos · ${r.steps} pasos\nJuega: https://cristiiaanlp.github.io/ecos/`;
+  return `${head}  ${star}\n${"⟲".repeat(r.timelines-1)||"—"}  ${r.timelines} ecos · ${r.steps} pasos\nJuega: ${CONFIG.GAME_URL}`;
 }
 function copyOrToast(txt){ if(navigator.clipboard) navigator.clipboard.writeText(txt).then(()=>toast("¡Copiado! 📋")).catch(()=>toast(txt)); else toast(txt); }
 function share(){
@@ -1358,6 +1358,8 @@ let settings=(()=>{ try{return Object.assign({music:false,vibrate:true,anim:true
 function saveSettings(){ try{localStorage.setItem(SET_KEY,JSON.stringify(settings));}catch(e){} applySettings(); }
 function applySettings(){ document.body.classList.toggle("noanim", !settings.anim); }
 applySettings();
+// retorno del pago de Stripe (Payment Link configurado para volver a GAME_URL?paid=1)
+try{ if(new URLSearchParams(location.search).get("paid")==="1"){ if(!settings.noAds){ settings.noAds=true; saveSettings(); toast("¡Gracias por tu compra! Anuncios eliminados 🙌"); } history.replaceState(null,"",location.pathname); } }catch(e){}
 
 const fxCanvas=document.getElementById("fxCanvas"); let fxctx=null, confetti=[];
 function fxSize(){ const dpr=Math.min(window.devicePixelRatio||1,2); fxCanvas.width=innerWidth*dpr; fxCanvas.height=innerHeight*dpr; fxctx=fxCanvas.getContext("2d"); fxctx.setTransform(dpr,0,0,dpr,0,0); }
@@ -1448,14 +1450,23 @@ function openHint(){
   document.getElementById("adIntro").style.display=""; document.getElementById("adPlaying").style.display="none";
   document.getElementById("adOverlay").classList.add("active");
 }
-/* ╔═══════════════════════════════════════════════════════════════════╗
-   ║  ANUNCIOS — PARA GANAR DINERO, RELLENA ESTO CUANDO LO TENGAS:       ║
-   ║  1) Crea cuenta en Google AdSense y activa "H5 Games Ads".          ║
-   ║  2) Pega tu ID de editor abajo (formato ca-pub-XXXXXXXXXXXXXXXX).   ║
-   ║  3) Sube el juego a tu dominio https (GitHub Pages vale) y listo.   ║
-   ║  Si lo dejas vacío "", se usa un anuncio SIMULADO (para pruebas).   ║
-   ╚═══════════════════════════════════════════════════════════════════╝ */
-const ADSENSE_CLIENT = ""; // <-- pega aquí "ca-pub-1234567890123456"
+/* ╔═══════════════════════════════════════════════════════════════════════════╗
+   ║  CONFIGURACIÓN — PEGA AQUÍ TUS CREDENCIALES CUANDO LAS TENGAS.              ║
+   ║  Mientras estén vacías, todo funciona en modo "simulado" (sin cobrar).     ║
+   ║                                                                            ║
+   ║  • ADSENSE_CLIENT: tu ID de Google AdSense (activa "H5 Games Ads").        ║
+   ║      Formato "ca-pub-XXXXXXXXXXXXXXXX". Vacío "" = anuncios simulados.      ║
+   ║  • STRIPE_PAYMENT_LINK: enlace de pago de Stripe para "quitar anuncios".   ║
+   ║      Créalo en Stripe → Payment Links, y en "Tras el pago" redirige a      ║
+   ║      GAME_URL + "?paid=1". Vacío "" = compra simulada.                      ║
+   ║  • GAME_URL: la URL pública del juego (se usa al compartir).               ║
+   ╚═══════════════════════════════════════════════════════════════════════════╝ */
+const CONFIG = {
+  ADSENSE_CLIENT:      "",   // p.ej. "ca-pub-1234567890123456"
+  STRIPE_PAYMENT_LINK: "",   // p.ej. "https://buy.stripe.com/xxxxxxxx"
+  GAME_URL:            "https://cristiiaanlp.github.io/ecos/"
+};
+const ADSENSE_CLIENT = CONFIG.ADSENSE_CLIENT; // alias interno
 
 let adBreakFn=null, adTimer=null;
 function initAds(){
@@ -1518,9 +1529,10 @@ function nextLevelWithAd(){
   if(!settings.noAds && levelsCleared>0 && levelsCleared%INTERSTITIAL_EVERY===0) playInterstitial(advance); else advance();
 }
 function purchaseRemoveAds(){
-  /* ===== COMPRA REAL =====
-     Conecta aquí un pago real (Stripe Checkout, o Google Play Billing si lo empaquetas como app).
-     Solo tras CONFIRMAR el pago pon settings.noAds=true. */
+  // COMPRA REAL: si hay Payment Link de Stripe, redirige a la pasarela.
+  // (Stripe debe volver a GAME_URL?paid=1 tras el pago; eso lo lee el bloque de arranque.)
+  if(CONFIG.STRIPE_PAYMENT_LINK){ try{ location.href=CONFIG.STRIPE_PAYMENT_LINK; return; }catch(e){} }
+  // COMPRA SIMULADA (sin credenciales todavía):
   if(confirm("Quitar anuncios para siempre por 1,99 € (compra SIMULADA en esta versión).")){
     settings.noAds=true; saveSettings(); toast("¡Gracias! Anuncios eliminados 🙌");
     if(document.getElementById("settingsOverlay").classList.contains("active")) buildSettings();

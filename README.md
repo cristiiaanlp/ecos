@@ -36,15 +36,28 @@ Un puzzle web sobre el **tiempo**: cuando te atascas, creas un **eco** que repit
 3. Crea un **eco** ⟲: vuelves al inicio y tu recorrido anterior se repite como un fantasma. Deja que el eco pise el botón mientras tú cruzas.
 4. Usa **esperar** ⏸ para sincronizarte con tus ecos.
 
-## 💰 Activar anuncios reales (monetización)
+## 💰 Monetización (todo preparado, solo faltan credenciales)
 
-El juego trae una pista (💡) que se desbloquea viendo un anuncio recompensado. Por defecto el anuncio está **simulado**. Para activar anuncios reales con Google AdSense for Games (H5):
+Todas las credenciales están en **un único bloque `CONFIG`** al principio del `<script>` de `index.html`. Mientras estén vacías, todo funciona en modo **simulado** (no cobra, no rompe nada).
 
-1. Crea una cuenta en **Google AdSense** y activa **H5 Games Ads**.
-2. En `index.html`, busca `const ADSENSE_CLIENT = ""` y pega tu ID de editor: `"ca-pub-XXXXXXXXXXXXXXXX"`.
-3. Sube el juego a tu dominio **https** (GitHub Pages sirve) y espera la aprobación.
+```js
+const CONFIG = {
+  ADSENSE_CLIENT:      "",   // "ca-pub-XXXXXXXXXXXXXXXX"
+  STRIPE_PAYMENT_LINK: "",   // "https://buy.stripe.com/xxxxxxxx"
+  GAME_URL:            "https://cristiiaanlp.github.io/ecos/"
+};
+```
 
-Si `ADSENSE_CLIENT` está vacío o el script no carga, se usa automáticamente el anuncio simulado (no rompe nada). El punto de recompensa es la función `onReward()`.
+**1) Anuncios (AdSense for Games / H5)** — pista recompensada (💡) + intersticial cada 3 niveles.
+- Crea cuenta en **Google AdSense**, activa **H5 Games Ads** y pega tu ID en `ADSENSE_CLIENT`.
+- Sube el juego a tu dominio **https** y espera la aprobación.
+
+**2) Quitar anuncios (1,99 €) con Stripe** — sin servidor, usando un **Payment Link**.
+- En Stripe → **Payment Links**, crea un enlace de 1,99 €.
+- En "Tras el pago", redirige a `GAME_URL` + `?paid=1`.
+- Pega ese enlace en `STRIPE_PAYMENT_LINK`.
+- Al volver con `?paid=1`, el juego activa "sin anuncios" (quita intersticiales y la pista pasa a ser gratis).
+- ⚠️ Es un desbloqueo del lado cliente (suficiente para un extra de 1,99 €). Para verificación 100% fiable haría falta un backend con webhook de Stripe.
 
 > El dinero depende del **tráfico**: para ingresos serios, publica también en portales (CrazyGames, Poki, GameDistribution).
 
