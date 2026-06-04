@@ -36,6 +36,18 @@ Un puzzle web sobre el **tiempo**: cuando te atascas, creas un **eco** que repit
 3. Crea un **eco** ⟲: vuelves al inicio y tu recorrido anterior se repite como un fantasma. Deja que el eco pise el botón mientras tú cruzas.
 4. Usa **esperar** ⏸ para sincronizarte con tus ecos.
 
+## 💰 Activar anuncios reales (monetización)
+
+El juego trae una pista (💡) que se desbloquea viendo un anuncio recompensado. Por defecto el anuncio está **simulado**. Para activar anuncios reales con Google AdSense for Games (H5):
+
+1. Crea una cuenta en **Google AdSense** y activa **H5 Games Ads**.
+2. En `index.html`, busca `const ADSENSE_CLIENT = ""` y pega tu ID de editor: `"ca-pub-XXXXXXXXXXXXXXXX"`.
+3. Sube el juego a tu dominio **https** (GitHub Pages sirve) y espera la aprobación.
+
+Si `ADSENSE_CLIENT` está vacío o el script no carga, se usa automáticamente el anuncio simulado (no rompe nada). El punto de recompensa es la función `onReward()`.
+
+> El dinero depende del **tráfico**: para ingresos serios, publica también en portales (CrazyGames, Poki, GameDistribution).
+
 ---
 
 Hecho con 🩵 — un solo archivo, cero dependencias.

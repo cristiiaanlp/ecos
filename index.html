@@ -1347,16 +1347,53 @@ function openHint(){
   document.getElementById("adIntro").style.display=""; document.getElementById("adPlaying").style.display="none";
   document.getElementById("adOverlay").classList.add("active");
 }
-let adTimer=null;
+/* ╔═══════════════════════════════════════════════════════════════════╗
+   ║  ANUNCIOS — PARA GANAR DINERO, RELLENA ESTO CUANDO LO TENGAS:       ║
+   ║  1) Crea cuenta en Google AdSense y activa "H5 Games Ads".          ║
+   ║  2) Pega tu ID de editor abajo (formato ca-pub-XXXXXXXXXXXXXXXX).   ║
+   ║  3) Sube el juego a tu dominio https (GitHub Pages vale) y listo.   ║
+   ║  Si lo dejas vacío "", se usa un anuncio SIMULADO (para pruebas).   ║
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+const ADSENSE_CLIENT = ""; // <-- pega aquí "ca-pub-1234567890123456"
+
+let adBreakFn=null, adTimer=null;
+function initAds(){
+  if(!ADSENSE_CLIENT) return; // sin ID → modo simulado
+  const s=document.createElement("script");
+  s.async=true; s.crossOrigin="anonymous";
+  s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="+ADSENSE_CLIENT;
+  s.onerror=()=>{ adBreakFn=null; }; // si no carga (sin red), seguimos con el simulado
+  document.head.appendChild(s);
+  window.adsbygoogle=window.adsbygoogle||[];
+  adBreakFn=(o)=>{ (window.adsbygoogle=window.adsbygoogle||[]).push(o); };
+  try{ adBreakFn({ preloadAdBreaks:"on", sound:"on" }); }catch(e){ adBreakFn=null; } // adConfig
+}
+initAds();
+
+function closeAd(){ clearInterval(adTimer); adTimer=null; document.getElementById("adOverlay").classList.remove("active"); }
 function playAd(){
   document.getElementById("adIntro").style.display="none"; document.getElementById("adPlaying").style.display="";
-  const claim=document.getElementById("adClaim"), cnt=document.getElementById("adCount"); claim.disabled=true;
-  /* ===== INTEGRACIÓN ANUNCIO REAL =====
-     Sustituye este temporizador simulado por un anuncio recompensado real, p. ej.:
-       window.adsbygoogle && adBreak({ type:'reward', beforeReward:(show)=>show(), adViewed:()=>onReward(), adBreakDone:()=>{} });
-     o el SDK de AdMob/AdSense H5 Games. Llama a onReward() cuando el usuario complete el anuncio. */
-  let t=5; cnt.textContent="Tu pista en "+t+"…";
-  clearInterval(adTimer);
+  const claim=document.getElementById("adClaim"), cnt=document.getElementById("adCount");
+
+  // ===== ANUNCIO REAL (AdSense H5) — se usa solo si hay ID configurado =====
+  if(adBreakFn && ADSENSE_CLIENT){
+    cnt.textContent="Cargando anuncio…"; claim.style.display="none";
+    let rewarded=false;
+    try{
+      adBreakFn({
+        type:"reward", name:"pista",
+        beforeReward:(showAdFn)=>{ cnt.textContent="Anuncio listo, reprodúcelo 👇"; showAdFn(); },
+        adViewed:()=>{ rewarded=true; onReward(); },          // ✅ lo vio entero → pista
+        adDismissed:()=>{ /* lo cerró antes: sin pista */ },
+        adBreakDone:()=>{ claim.style.display=""; if(!rewarded) closeAd(); }
+      });
+      return;
+    }catch(e){ /* si falla, cae al simulado de abajo */ }
+  }
+
+  // ===== ANUNCIO SIMULADO (desarrollo / sin ID) =====
+  claim.style.display=""; claim.disabled=true;
+  let t=5; cnt.textContent="Tu pista en "+t+"…"; clearInterval(adTimer);
   adTimer=setInterval(()=>{ t--; if(t>0){ cnt.textContent="Tu pista en "+t+"…"; }
     else { clearInterval(adTimer); adTimer=null; cnt.textContent="¡Listo! Reclama tu pista 👇"; claim.disabled=false; } }, 1000);
 }
