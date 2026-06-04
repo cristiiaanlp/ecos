@@ -61,6 +61,28 @@ const CONFIG = {
 
 > El dinero depende del **tráfico**: para ingresos serios, publica también en portales (CrazyGames, Poki, GameDistribution).
 
+## 🚀 Checklist de lanzamiento (paso a paso)
+
+**A. Publicar el juego (gratis, ~5 min)**
+- [ ] GitHub → repo → **Settings → Pages** → Source: *Deploy from a branch* → `main` / `/(root)` → Save.
+- [ ] Esperar ~1 min. URL pública: `https://cristiiaanlp.github.io/ecos/`.
+- [ ] (Opcional) Exportar `cover.svg` a `cover.png` (1200×630) y cambiar las 2 líneas `og:image`/`twitter:image` a `cover.png` (mejor tarjeta en WhatsApp/Facebook).
+
+**B. Anuncios (necesita aprobación, días/semanas)**
+- [ ] Crear cuenta en **Google AdSense** y solicitar **H5 Games Ads** (requiere sitio propio con algo de tráfico; puede tardar en aprobarse).
+- [ ] Cuando te aprueben, pegar tu ID en `CONFIG.ADSENSE_CLIENT` y volver a subir.
+
+**C. Cobrar el "quitar anuncios" (cuenta Stripe verificada)**
+- [ ] Crear cuenta **Stripe** (pide identidad y cuenta bancaria; verificación ~1-2 días).
+- [ ] Stripe → **Payment Links** → enlace de 1,99 € → "Tras el pago" redirige a `GAME_URL?paid=1`.
+- [ ] Pegar el enlace en `CONFIG.STRIPE_PAYMENT_LINK`.
+
+**D. Tráfico (lo que de verdad da dinero)**
+- [ ] Enviar a portales: **GameDistribution** e **itch.io** (entrada rápida), **CrazyGames** y **Poki** (revisión).
+- [ ] Grabar clips cortos del "momento eco" para TikTok/Shorts/Reels.
+
+> Resumen: el **código no hay que tocarlo** salvo pegar 2 valores en `CONFIG`. El resto son trámites de cuentas y, sobre todo, **conseguir jugadores**.
+
 ---
 
 Hecho con 🩵 — un solo archivo, cero dependencias.
