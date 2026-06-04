@@ -8,14 +8,16 @@ Un puzzle web sobre el **tiempo**: cuando te atascas, creas un **eco** que repit
 
 ## Características
 
-- 🧩 **150 niveles** con dificultad creciente, en 6 mundos (Tutorial → Leyenda).
+- 🧩 **155 niveles** con dificultad creciente, en 6 mundos (Tutorial → Leyenda) + un mundo bonus de **📦 Cajas**.
 - 🔗 **Mecánica de cadenas:** en los mundos avanzados cada botón se esconde tras la puerta que abre el anterior.
+- 📦 **Cajas empujables:** colócalas sobre los botones para mantener puertas abiertas sin gastar un eco.
 - 🎨 **Botones y puertas con color + símbolo** (accesible para daltónicos).
 - 🛠️ **Editor de niveles** con códigos para compartir tus creaciones.
-- 📅 **Reto del día** + 🔥 racha diaria + 🏆 logros.
-- ⭐ **Estrellas como llave** para desbloquear los mundos finales.
+- 📅 **Reto del día** + 🔥 racha diaria + 🏆 logros + ⭐ estrellas como llave.
+- 📲 **PWA:** instalable en el móvil y jugable **sin conexión**.
+- ⚙️ **Ajustes:** sonido, música, vibración, animaciones y reinicio de progreso.
 - 📱🖥️ Responsive: se juega bien en móvil (táctil) y en PC (teclado).
-- 🔊 Sonido, animaciones y guardado de progreso local. Sin dependencias, todo en un único `index.html`.
+- 🎉 Confetti, vibración y sonido. Cero dependencias.
 
 ## Controles
 
