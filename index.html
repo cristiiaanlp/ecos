@@ -221,6 +221,10 @@
   body.noanim .screen.active{ animation:none; }
   @keyframes shake{ 10%,90%{transform:translateX(-2px);} 20%,80%{transform:translateX(4px);} 30%,50%,70%{transform:translateX(-7px);} 40%,60%{transform:translateX(7px);} }
   .stage.shake{ animation:shake .45s; }
+  /* ----- anuncio + pista ----- */
+  .adbox{ position:relative; height:140px; border-radius:12px; margin:4px 0 12px; display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:19px; color:#1a1205; letter-spacing:.04em; background:linear-gradient(135deg,#f59e0b,#ef4444 55%,#8b5cf6); }
+  .adtag{ position:absolute; top:7px; left:9px; font-size:10px; font-weight:700; color:rgba(0,0,0,.55); background:rgba(255,255,255,.5); padding:2px 6px; border-radius:5px; letter-spacing:.06em; }
 </style>
 </head>
 <body>
@@ -278,6 +282,7 @@
       <div class="lname" id="lvlName">Nivel</div>
       <div class="chip">ecos <b id="hudEchoes">0</b><span id="hudPar" style="color:var(--dim)"></span></div>
       <div class="chip">pasos <b id="hudSteps">0</b></div>
+      <button class="iconbtn" id="btnHint" title="Pista">💡</button>
     </div>
     <div class="stage"><canvas id="cv"></canvas></div>
     <div class="hint" id="hint"></div>
@@ -364,6 +369,24 @@
     <div class="cardbtns">
       <button class="btn" id="setReset">🗑️ Reiniciar progreso</button>
       <button class="btn primary" id="setClose">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="adOverlay">
+  <div class="card">
+    <h2>💡 Pista</h2>
+    <div id="adIntro">
+      <p class="codehelp">Mira un anuncio corto y te enseñamos cómo superar el nivel: la <b style="color:var(--gold)">ruta hasta la salida</b> y la estrategia.</p>
+      <div class="cardbtns">
+        <button class="btn primary" id="adWatch">▶ Ver anuncio</button>
+        <button class="btn ghost" id="adCancel">Ahora no</button>
+      </div>
+    </div>
+    <div id="adPlaying" style="display:none">
+      <div class="adbox"><span class="adtag">Anuncio</span>Tu publicidad aquí</div>
+      <p class="codehelp" id="adCount">Tu pista en 5…</p>
+      <button class="btn primary" id="adClaim" disabled>Reclamar pista 💡</button>
     </div>
   </div>
 </div>
@@ -629,7 +652,8 @@ function startGame(lv, opts){
   G={ idx:(opts.idx==null?-1:opts.idx), custom:!!opts.custom, daily:false, lv, R:lv.R, C:lv.C, spawn:lv.spawn,
       recordings:[], live:[], turn:0, solved:false, usedUndo:false,
       logical:[{...lv.spawn}], display:[{r:lv.spawn.r,c:lv.spawn.c}],
-      faces:["D"], flash:0, coachStage:0, pressedOnce:false };
+      faces:["D"], flash:0, coachStage:0, pressedOnce:false,
+      hintShown:false, hintOn:false, hintPath:null };
   const title = opts.title || (lv.gen ? `Nivel ${G.idx+1}` : (G.idx>=0 ? `${G.idx+1}. ${nameFor(G.idx)}` : "Nivel"));
   document.getElementById("lvlName").textContent = title;
   document.getElementById("hudPar").textContent = ` /${lv.par}`;
@@ -872,6 +896,12 @@ function render(){
     ctx.beginPath();
     for(let t=0;t<=len;t++){ const p=hist[t][i]; const x=p.c*cell+cell/2, y=p.r*cell+cell/2; t===0?ctx.moveTo(x,y):ctx.lineTo(x,y); }
     ctx.stroke(); ctx.restore();
+  }
+  // ruta de pista (dorada)
+  if(G.hintOn && G.hintPath && G.hintPath.length){
+    ctx.save(); ctx.strokeStyle="rgba(251,191,36,.92)"; ctx.lineWidth=Math.max(3,cell*.13); ctx.lineCap="round"; ctx.lineJoin="round";
+    ctx.shadowColor="#fbbf24"; ctx.shadowBlur=12; ctx.setLineDash([cell*.04, cell*.30]);
+    ctx.beginPath(); G.hintPath.forEach((p,i)=>{ const x=p.c*cell+cell/2,y=p.r*cell+cell/2; i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke(); ctx.restore();
   }
   // cajas
   if(G.boxDisp) for(const b of G.boxDisp) drawBox(b);
@@ -1286,6 +1316,56 @@ document.getElementById("settingsOverlay").addEventListener("click", e=>{ if(e.t
 document.getElementById("setReset").addEventListener("click", ()=>{
   if(confirm("¿Borrar todo tu progreso, estrellas y logros?")){ progress={}; saveProgress(); meta={streak:0,lastDay:0,ach:{}}; saveMeta(); toast("Progreso reiniciado"); updateMenu(); buildSettings(); }
 });
+
+/* ===================== PISTA (desbloqueada con anuncio) ===================== */
+function solveRoute(lv){ // ruta inicio→salida con TODAS las puertas abiertas (lo que recorrerás al final)
+  const openAll=new Set(lv.doors.map(d=>d.id)); const prev={}; prev[key(lv.spawn.r,lv.spawn.c)]=null;
+  const q=[[lv.spawn.r,lv.spawn.c]]; let found=false;
+  while(q.length){ const [r,c]=q.shift(); if(r===lv.exit.r&&c===lv.exit.c){found=true;break;}
+    for(const d of [[-1,0],[1,0],[0,-1],[0,1]]){ const nr=r+d[0],nc=c+d[1];
+      if(nr<0||nc<0||nr>=lv.R||nc>=lv.C||lv.wall[nr][nc]) continue;
+      const did=lv.dId[nr][nc]; if(did>=0&&!openAll.has(did)) continue;
+      const kk=key(nr,nc); if(kk in prev) continue; prev[kk]=key(r,c); q.push([nr,nc]); } }
+  if(!found) return [];
+  const path=[]; let cur=key(lv.exit.r,lv.exit.c);
+  while(cur!=null){ const [r,c]=cur.split(",").map(Number); path.unshift({r,c}); cur=prev[cur]; }
+  return path;
+}
+function hintText(lv){
+  const need=lv.par-1;
+  if(lv.boxes&&lv.boxes.length) return "💡 Empuja las cajas 📦 sobre los botones para abrir las puertas y sigue la ruta dorada hasta la salida.";
+  if(lv.chained) return `💡 Encadénalos: pisa primero el botón más cercano al inicio y, eco a eco, ve abriendo la puerta siguiente en orden. Cruza al final por la ruta dorada (~${need} ecos).`;
+  if(need<=0) return "💡 Solo tienes que llegar a la salida siguiendo la ruta dorada.";
+  return `💡 Manda un eco a cada botón (${lv.buttons.length}) para mantener abiertas las puertas y cruza con tu último yo por la ruta dorada (~${need} ecos).`;
+}
+function revealHint(){ G.hintShown=true; G.hintOn=true; G.hintPath=solveRoute(G.lv); setHint(hintText(G.lv), false); }
+function openHint(){
+  if(!G || G.solved) return;
+  if(G.hintShown){ // ya desbloqueada en este nivel: alterna mostrar/ocultar la ruta
+    G.hintOn=!G.hintOn; setHint(G.hintOn?hintText(G.lv):G.lv.hint, false); return;
+  }
+  document.getElementById("adIntro").style.display=""; document.getElementById("adPlaying").style.display="none";
+  document.getElementById("adOverlay").classList.add("active");
+}
+let adTimer=null;
+function playAd(){
+  document.getElementById("adIntro").style.display="none"; document.getElementById("adPlaying").style.display="";
+  const claim=document.getElementById("adClaim"), cnt=document.getElementById("adCount"); claim.disabled=true;
+  /* ===== INTEGRACIÓN ANUNCIO REAL =====
+     Sustituye este temporizador simulado por un anuncio recompensado real, p. ej.:
+       window.adsbygoogle && adBreak({ type:'reward', beforeReward:(show)=>show(), adViewed:()=>onReward(), adBreakDone:()=>{} });
+     o el SDK de AdMob/AdSense H5 Games. Llama a onReward() cuando el usuario complete el anuncio. */
+  let t=5; cnt.textContent="Tu pista en "+t+"…";
+  clearInterval(adTimer);
+  adTimer=setInterval(()=>{ t--; if(t>0){ cnt.textContent="Tu pista en "+t+"…"; }
+    else { clearInterval(adTimer); adTimer=null; cnt.textContent="¡Listo! Reclama tu pista 👇"; claim.disabled=false; } }, 1000);
+}
+function onReward(){ clearInterval(adTimer); adTimer=null; document.getElementById("adOverlay").classList.remove("active"); revealHint(); toast("Pista desbloqueada 💡"); }
+document.getElementById("btnHint").addEventListener("click", openHint);
+document.getElementById("adWatch").addEventListener("click", playAd);
+document.getElementById("adClaim").addEventListener("click", onReward);
+document.getElementById("adCancel").addEventListener("click", ()=>document.getElementById("adOverlay").classList.remove("active"));
+document.getElementById("adOverlay").addEventListener("click", e=>{ if(e.target.id==="adOverlay"){ clearInterval(adTimer); adTimer=null; e.currentTarget.classList.remove("active"); } });
 
 buildGrid(); updateMenu(); resizeFx("menu");
 </script>
