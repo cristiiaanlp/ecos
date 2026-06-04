@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="90%">
+      <stop offset="0%" stop-color="#16202c"/><stop offset="100%" stop-color="#0d1117"/>
+    </radialGradient>
+    <linearGradient id="logo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7ff3e6"/><stop offset="45%" stop-color="#2dd4bf"/>
+      <stop offset="75%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#e879f9"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.5"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- rastro de ecos siguiendo a "tú" -->
+  <path d="M 250 470 Q 430 360 600 410 T 920 320" fill="none" stroke="#2dd4bf" stroke-width="6" stroke-dasharray="3 26" stroke-linecap="round" opacity="0.5"/>
+  <g>
+    <rect x="226" y="436" width="58" height="58" rx="18" fill="#46566b" opacity="0.4"/>
+    <rect x="370" y="392" width="66" height="66" rx="20" fill="#46566b" opacity="0.6"/>
+    <circle cx="600" cy="410" r="90" fill="url(#glow)"/>
+    <rect x="548" y="358" width="104" height="104" rx="32" fill="#2dd4bf"/>
+    <circle cx="586" cy="402" r="13" fill="#04201c"/><circle cx="624" cy="402" r="13" fill="#04201c"/>
+  </g>
+  <!-- portal salida -->
+  <circle cx="930" cy="320" r="44" fill="none" stroke="#34d399" stroke-width="12"/>
+  <!-- logo + claim -->
+  <text x="600" y="200" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-weight="900" font-size="150" letter-spacing="14" fill="url(#logo)">ECOS</text>
+  <text x="600" y="258" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="34" fill="#8b97a6" letter-spacing="3">coordínate con tus yos del pasado</text>
+  <text x="600" y="585" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="28" fill="#46566b">155 niveles · reto diario · editor · sin conexión</text>
+</svg>

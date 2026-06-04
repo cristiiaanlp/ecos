@@ -11,6 +11,16 @@
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="icon" href="icon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="icon.svg" />
+<meta name="description" content="ECOS: un puzzle web donde cooperas contigo mismo a través del tiempo. 155 niveles, reto diario, editor y modo sin conexión." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="ECOS — coordina con tus yos del pasado" />
+<meta property="og:description" content="Un puzzle donde te coordinas con tus yos del pasado. 155 niveles, reto diario y editor de niveles." />
+<meta property="og:url" content="https://cristiiaanlp.github.io/ecos/" />
+<meta property="og:image" content="https://cristiiaanlp.github.io/ecos/cover.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="ECOS — coordina con tus yos del pasado" />
+<meta name="twitter:description" content="Un puzzle donde te coordinas con tus yos del pasado." />
+<meta name="twitter:image" content="https://cristiiaanlp.github.io/ecos/cover.svg" />
 <title>ECOS — coordina con tus yos del pasado</title>
 <script>
   if ("serviceWorker" in navigator) {
@@ -733,7 +743,9 @@ function newEcho(){
   if(!G||G.solved) return;
   if(G.live.length===0){ toast("Muévete antes de crear un eco"); return; }
   G.recordings.push(G.live); G.live=[]; G.turn=0;
-  refreshLogical(true); G.flash=1; sweep(); setEchoPulse(false);
+  refreshLogical(true); sweep(); setEchoPulse(false);
+  if(settings.anim){ G.flash=1; spawnEchoBurst(); }
+  if(settings.vibrate && navigator.vibrate) try{navigator.vibrate(30);}catch(e){}
   if(G.idx<=2) setHint("⟲ ECO creado. Mira su rastro de color: repetirá esos pasos. Ahora ve TÚ a cruzar la puerta.", false);
   toast("Eco creado — ¡tu pasado te repite!");
   updateHUD();
@@ -744,7 +756,9 @@ function undo(){
   if(G.live.length===0){ if(G.recordings.length){ G.live=G.recordings.pop(); G.turn=G.live.length; refreshLogical(); updateHUD(); } return; }
   G.live.pop(); G.turn--; refreshLogical(); updateHUD();
 }
-function restart(){ if(G) startLevel(G.idx); }
+const restartCount={};
+function restart(){ if(!G) return; const id=G.idx; restartCount[id]=(restartCount[id]||0)+1; const many=restartCount[id]>=3;
+  startLevel(id); if(many && !G.hintShown && G.idx>=0) toast("¿Atascado? Pulsa 💡 para una pista"); }
 function totalSteps(){ let s=G.live.length; for(const r of G.recordings) s+=r.length; return s; }
 function updateHUD(){ document.getElementById("hudEchoes").textContent=G.recordings.length; document.getElementById("hudSteps").textContent=totalSteps(); }
 
@@ -789,14 +803,36 @@ document.getElementById("btnNext").addEventListener("click", ()=>{ closeWin(); c
 document.getElementById("btnReplay").addEventListener("click", ()=>{ closeWin(); startLevel(G.idx); });
 document.getElementById("btnShare").addEventListener("click", share);
 function closeWin(){ document.getElementById("winOverlay").classList.remove("active"); }
-function share(){
-  const r=G._res; if(!r) return;
+function shareText(r){
   const star="★".repeat(r.stars)+"☆".repeat(3-r.stars);
   const head=r.custom?"ECOS · Nivel compartido":(r.daily?"ECOS · Reto del día":"ECOS · Nivel "+(r.idx+1));
-  const txt=`${head}  ${star}\n${"⟲".repeat(r.timelines-1)||"—"}  ${r.timelines} ecos · ${r.steps} pasos\nJuega: https://cristiiaanlp.github.io/ecos/`;
-  if(navigator.share) navigator.share({text:txt}).catch(()=>{});
-  else if(navigator.clipboard) navigator.clipboard.writeText(txt).then(()=>toast("¡Resultado copiado!"));
-  else toast(txt);
+  return `${head}  ${star}\n${"⟲".repeat(r.timelines-1)||"—"}  ${r.timelines} ecos · ${r.steps} pasos\nJuega: https://cristiiaanlp.github.io/ecos/`;
+}
+function copyOrToast(txt){ if(navigator.clipboard) navigator.clipboard.writeText(txt).then(()=>toast("¡Copiado! 📋")).catch(()=>toast(txt)); else toast(txt); }
+function share(){
+  const r=G._res; if(!r) return; const txt=shareText(r);
+  try{
+    const W=1080,H=1080, c=document.createElement("canvas"); c.width=W; c.height=H; const x=c.getContext("2d");
+    const g=x.createRadialGradient(W/2,H*0.32,40,W/2,H*0.32,W); g.addColorStop(0,"#16202c"); g.addColorStop(1,"#0d1117"); x.fillStyle=g; x.fillRect(0,0,W,H);
+    x.textAlign="center";
+    // eco (fantasma) + tú
+    x.fillStyle="rgba(120,150,180,.35)"; x.beginPath(); x.roundRect(W/2-160,566,116,116,32); x.fill();
+    const gl=x.createRadialGradient(W/2+92,624,8,W/2+92,624,180); gl.addColorStop(0,"rgba(45,212,191,.5)"); gl.addColorStop(1,"rgba(45,212,191,0)"); x.fillStyle=gl; x.beginPath(); x.arc(W/2+92,624,150,0,7); x.fill();
+    x.fillStyle="#2dd4bf"; x.beginPath(); x.roundRect(W/2+34,566,116,116,32); x.fill();
+    x.fillStyle="#04201c"; x.beginPath(); x.arc(W/2+74,616,15,0,7); x.arc(W/2+120,616,15,0,7); x.fill();
+    // texto
+    x.fillStyle="#2dd4bf"; x.font="900 150px system-ui,sans-serif"; x.fillText("ECOS",W/2,250);
+    x.fillStyle="#8b97a6"; x.font="38px system-ui,sans-serif"; x.fillText(r.custom?"Nivel compartido":(r.daily?"Reto del día":"Nivel "+(r.idx+1)),W/2,318);
+    x.fillStyle="#fbbf24"; x.font="128px system-ui,sans-serif"; x.fillText("★".repeat(r.stars)+"☆".repeat(3-r.stars),W/2,470);
+    x.fillStyle="#e6edf3"; x.font="bold 58px system-ui,sans-serif"; x.fillText(`${r.timelines} ecos · ${r.steps} pasos`,W/2,540);
+    x.fillStyle="#46566b"; x.font="34px system-ui,sans-serif"; x.fillText("cristiiaanlp.github.io/ecos",W/2,H-56);
+    c.toBlob(b=>{
+      if(b && navigator.canShare){ const file=new File([b],"ecos.png",{type:"image/png"});
+        if(navigator.canShare({files:[file]})){ navigator.share({files:[file], text:txt}).catch(()=>copyOrToast(txt)); return; } }
+      if(b){ const u=URL.createObjectURL(b); const a=document.createElement("a"); a.href=u; a.download="ecos.png"; a.click(); setTimeout(()=>URL.revokeObjectURL(u),3000); }
+      copyOrToast(txt);
+    }, "image/png");
+  }catch(e){ if(navigator.share) navigator.share({text:txt}).catch(()=>copyOrToast(txt)); else copyOrToast(txt); }
 }
 document.getElementById("btnDaily").addEventListener("click", ()=>{
   const day=Math.floor(Date.now()/86400000); startLevel(day%TOTAL_LEVELS);
@@ -835,7 +871,9 @@ function draw(){
     if(G.boxDisp) for(let i=0;i<G.boxLog.length;i++){ const d=G.boxDisp[i], l=G.boxLog[i];
       d.r+=(l.r-d.r)*0.35; d.c+=(l.c-d.c)*0.35;
       if(Math.abs(d.r-l.r)<0.002)d.r=l.r; if(Math.abs(d.c-l.c)<0.002)d.c=l.c; }
-    if(G.flash>0) G.flash=Math.max(0,G.flash-0.04);
+    if(G.flash>0) G.flash=Math.max(0,G.flash-0.05);
+    if(G.echoFx){ G.echoFx.t+=0.045; if(G.echoFx.t>=1) G.echoFx=null; }
+    if(G.echoParts){ for(const p of G.echoParts){ p.x+=p.vx; p.y+=p.vy; p.vx*=0.9; p.vy*=0.9; p.life-=0.035; } G.echoParts=G.echoParts.filter(p=>p.life>0); if(!G.echoParts.length) G.echoParts=null; }
     render();
   }
   drawMenuFx(); drawDemo();
@@ -907,8 +945,21 @@ function render(){
   if(G.boxDisp) for(const b of G.boxDisp) drawBox(b);
   // selves (ecos primero, tú al final)
   for(let i=0;i<n;i++) drawSelf(G.display[i], i===n-1, i, G.faces[i]);
-  // flash al crear eco
-  if(G.flash>0){ ctx.save(); ctx.globalAlpha=G.flash*.5; ctx.fillStyle="#2dd4bf"; ctx.fillRect(0,0,cv.width,cv.height); ctx.restore(); }
+  // ===== efecto "crear eco" (momento clip) =====
+  if(G.flash>0){ ctx.save(); ctx.globalAlpha=G.flash*.45; ctx.fillStyle="#2dd4bf"; ctx.fillRect(0,0,cv.width,cv.height); ctx.restore(); }
+  if(G.echoFx){ const k=G.echoFx.t, sx=G.spawn.c*cell+cell/2, sy=G.spawn.r*cell+cell/2;
+    ctx.save(); ctx.lineCap="round";
+    ctx.globalAlpha=(1-k)*0.7; ctx.strokeStyle="#7ff3e6"; ctx.lineWidth=5; ctx.beginPath(); ctx.arc(sx,sy,k*cell*4.5,0,7); ctx.stroke();
+    ctx.globalAlpha=(1-k)*0.45; ctx.strokeStyle="#2dd4bf"; ctx.lineWidth=8; ctx.beginPath(); ctx.arc(sx,sy,k*cell*2.8,0,7); ctx.stroke();
+    ctx.restore();
+  }
+  if(G.echoParts){ ctx.save(); for(const p of G.echoParts){ ctx.globalAlpha=Math.max(0,p.life); ctx.fillStyle="#7ff3e6";
+    ctx.beginPath(); ctx.arc(p.x,p.y,Math.max(1.5,cell*.07*p.life),0,7); ctx.fill(); } ctx.restore(); }
+}
+function spawnEchoBurst(){
+  const sx=G.spawn.c*cell+cell/2, sy=G.spawn.r*cell+cell/2; G.echoFx={t:0}; G.echoParts=[];
+  for(let i=0;i<24;i++){ const a=(i/24)*Math.PI*2, sp=2.5+Math.random()*3.5;
+    G.echoParts.push({ x:sx, y:sy, vx:Math.cos(a)*sp, vy:Math.sin(a)*sp, life:1 }); }
 }
 function drawBox(b){
   const x=b.c*cell, y=b.r*cell, m=cell*.14, s=cell-2*m;
@@ -1295,6 +1346,10 @@ function startMusic(){ if(musicTimer||muted) return; const a=ac(); if(!a) return
 function stopMusic(){ if(musicTimer){ clearInterval(musicTimer); musicTimer=null; } }
 function updateMusic(){ if(settings.music && !muted) startMusic(); else stopMusic(); }
 document.addEventListener("click", ()=>{ if(settings.music && !muted) startMusic(); });
+/* pausa de audio al perder el foco / pestaña oculta (requisito de portales) */
+document.addEventListener("visibilitychange", ()=>{ if(document.hidden) stopMusic(); else if(settings.music && !muted) startMusic(); });
+window.addEventListener("blur", stopMusic);
+window.addEventListener("focus", ()=>{ if(settings.music && !muted) startMusic(); });
 
 /* panel de ajustes */
 function buildSettings(){
