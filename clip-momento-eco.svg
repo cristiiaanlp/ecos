@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" font-family="Segoe UI, system-ui, sans-serif">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="32%" r="85%">
+      <stop offset="0%" stop-color="#16202c"/><stop offset="100%" stop-color="#0d1117"/>
+    </radialGradient>
+    <linearGradient id="logo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7ff3e6"/><stop offset="45%" stop-color="#2dd4bf"/>
+      <stop offset="75%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#e879f9"/>
+    </linearGradient>
+    <radialGradient id="glowTeal" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.6"/><stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="portal" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#9bffd6"/><stop offset="50%" stop-color="#34d399"/><stop offset="100%" stop-color="#34d399" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="flash" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7ff3e6" stop-opacity="0.45"/><stop offset="100%" stop-color="#7ff3e6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+
+  <!-- marca -->
+  <text x="540" y="112" text-anchor="middle" font-weight="900" font-size="74" letter-spacing="9" fill="url(#logo)">ECOS</text>
+
+  <!-- ===================== TABLERO ===================== -->
+  <!-- panel -->
+  <rect x="120" y="160" width="840" height="840" rx="26" fill="#0e141c" stroke="#2b3440" stroke-width="2"/>
+
+  <!-- rejilla sutil -->
+  <g stroke="#1b2330" stroke-width="2" opacity="0.8">
+    <line x1="240" y1="160" x2="240" y2="1000"/><line x1="360" y1="160" x2="360" y2="1000"/>
+    <line x1="480" y1="160" x2="480" y2="1000"/><line x1="600" y1="160" x2="600" y2="1000"/>
+    <line x1="720" y1="160" x2="720" y2="1000"/><line x1="840" y1="160" x2="840" y2="1000"/>
+    <line x1="120" y1="280" x2="960" y2="280"/><line x1="120" y1="400" x2="960" y2="400"/>
+    <line x1="120" y1="520" x2="960" y2="520"/><line x1="120" y1="640" x2="960" y2="640"/>
+    <line x1="120" y1="760" x2="960" y2="760"/><line x1="120" y1="880" x2="960" y2="880"/>
+  </g>
+
+  <!-- algunos muros para dar estructura -->
+  <g fill="#1b2330">
+    <rect x="246" y="286" width="108" height="108" rx="8"/>
+    <rect x="606" y="286" width="108" height="108" rx="8"/>
+    <rect x="246" y="646" width="108" height="108" rx="8"/>
+    <rect x="606" y="646" width="108" height="108" rx="8"/>
+  </g>
+
+  <!-- ===================== RASTROS ===================== -->
+  <!-- rastro del eco que pisa el botón (gris) -->
+  <path d="M 300 820 L 780 820 L 780 340" fill="none" stroke="#96b4d2" stroke-width="6" stroke-dasharray="2 22" stroke-linecap="round" opacity="0.45"/>
+  <!-- rastro de tú (teal) hacia la puerta y la salida -->
+  <path d="M 300 820 L 300 580 L 540 580 L 540 340" fill="none" stroke="#2dd4bf" stroke-width="7" stroke-dasharray="0" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- ===================== SALIDA (portal verde) ===================== -->
+  <circle cx="540" cy="340" r="92" fill="url(#portal)"/>
+  <circle cx="540" cy="340" r="58" fill="none" stroke="#34d399" stroke-width="6"/>
+
+  <!-- ===================== PUERTA (abierta) tras TÚ ===================== -->
+  <g>
+    <rect x="484" y="524" width="112" height="112" rx="14" fill="#e879f9" opacity="0.14"/>
+    <rect x="484" y="524" width="112" height="112" rx="14" fill="none" stroke="#e879f9" stroke-width="3" stroke-dasharray="6 6" opacity="0.6"/>
+    <text x="540" y="592" text-anchor="middle" font-size="46" fill="#e879f9" opacity="0.30">▲</text>
+  </g>
+
+  <!-- ===================== BOTÓN (pulsado) + ECO 1 ===================== -->
+  <g>
+    <circle cx="780" cy="340" r="40" fill="#e879f9"/>
+    <circle cx="780" cy="340" r="40" fill="none" stroke="#e879f9" stroke-width="3"/>
+    <text x="780" y="356" text-anchor="middle" font-size="40" font-weight="700" fill="#04201c">▲</text>
+  </g>
+  <!-- eco 1 sobre el botón -->
+  <g>
+    <rect x="744" y="304" width="72" height="72" rx="22" fill="#7891b4" opacity="0.34"/>
+    <circle cx="766" cy="334" r="8" fill="#ffffff" opacity="0.6"/>
+    <circle cx="794" cy="334" r="8" fill="#ffffff" opacity="0.6"/>
+    <g font-size="22" font-weight="700">
+      <rect x="757" y="270" width="46" height="26" rx="13" fill="#7891b4" opacity="0.85"/>
+      <text x="780" y="288" text-anchor="middle" fill="#0a0e13">eco</text>
+    </g>
+  </g>
+
+  <!-- ===================== ECO 2 (en su rastro) ===================== -->
+  <g>
+    <rect x="504" y="784" width="72" height="72" rx="22" fill="#7891b4" opacity="0.3"/>
+    <circle cx="526" cy="814" r="8" fill="#ffffff" opacity="0.55"/>
+    <circle cx="554" cy="814" r="8" fill="#ffffff" opacity="0.55"/>
+  </g>
+
+  <!-- ===================== TÚ (cruzando la puerta) ===================== -->
+  <circle cx="540" cy="580" r="108" fill="url(#glowTeal)"/>
+  <rect x="504" y="544" width="72" height="72" rx="22" fill="#2dd4bf"/>
+  <rect x="504" y="544" width="72" height="72" rx="22" fill="none" stroke="#0a0e13" stroke-width="1.5"/>
+  <!-- ojos mirando arriba (hacia la salida) -->
+  <circle cx="524" cy="570" r="10" fill="#ffffff"/><circle cx="556" cy="570" r="10" fill="#ffffff"/>
+  <circle cx="524" cy="568" r="5" fill="#04201c"/><circle cx="556" cy="568" r="5" fill="#04201c"/>
+  <!-- etiqueta TÚ -->
+  <g>
+    <rect x="513" y="500" width="54" height="28" rx="14" fill="#2dd4bf"/>
+    <text x="540" y="520" text-anchor="middle" font-size="22" font-weight="800" fill="#04201c">TÚ</text>
+  </g>
+
+  <!-- ===================== MOMENTO ECO: flash en el inicio ===================== -->
+  <g>
+    <circle cx="300" cy="820" r="120" fill="url(#flash)"/>
+    <circle cx="300" cy="820" r="70" fill="none" stroke="#7ff3e6" stroke-width="5" opacity="0.55"/>
+    <circle cx="300" cy="820" r="104" fill="none" stroke="#2dd4bf" stroke-width="8" opacity="0.28"/>
+    <circle cx="300" cy="820" r="146" fill="none" stroke="#2dd4bf" stroke-width="4" opacity="0.14"/>
+    <!-- partículas -->
+    <g fill="#7ff3e6">
+      <circle cx="300" cy="724" r="6" opacity="0.9"/><circle cx="368" cy="752" r="5" opacity="0.8"/>
+      <circle cx="396" cy="820" r="6" opacity="0.85"/><circle cx="368" cy="888" r="4" opacity="0.7"/>
+      <circle cx="300" cy="916" r="6" opacity="0.85"/><circle cx="232" cy="888" r="5" opacity="0.75"/>
+      <circle cx="204" cy="820" r="6" opacity="0.8"/><circle cx="232" cy="752" r="4" opacity="0.7"/>
+    </g>
+    <!-- icono crear eco (moneda teal) -->
+    <circle cx="300" cy="820" r="40" fill="#2dd4bf"/>
+    <text x="300" y="840" text-anchor="middle" font-size="52" font-weight="700" fill="#04201c">⟲</text>
+  </g>
+
+  <!-- caption -->
+  <text x="540" y="1052" text-anchor="middle" font-size="30" letter-spacing="2" fill="#8b97a6">⟲ el momento eco · coopera contigo mismo en el tiempo</text>
+</svg>

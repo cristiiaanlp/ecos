@@ -9,18 +9,21 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="ECOS" />
 <link rel="manifest" href="manifest.webmanifest" />
-<link rel="icon" href="icon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="icon.svg" />
+<link rel="icon" href="icon-192.png" type="image/png" sizes="192x192" />
+<link rel="icon" href="icon-512.png" type="image/png" sizes="512x512" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <meta name="description" content="ECOS: un puzzle web donde cooperas contigo mismo a través del tiempo. 155 niveles, reto diario, editor y modo sin conexión." />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="ECOS — coordina con tus yos del pasado" />
 <meta property="og:description" content="Un puzzle donde te coordinas con tus yos del pasado. 155 niveles, reto diario y editor de niveles." />
 <meta property="og:url" content="https://cristiiaanlp.github.io/ecos/" />
-<meta property="og:image" content="https://cristiiaanlp.github.io/ecos/cover.svg" />
+<meta property="og:image" content="https://cristiiaanlp.github.io/ecos/images/cover.png" />
+<meta property="og:image:width" content="1730" />
+<meta property="og:image:height" content="909" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="ECOS — coordina con tus yos del pasado" />
 <meta name="twitter:description" content="Un puzzle donde te coordinas con tus yos del pasado." />
-<meta name="twitter:image" content="https://cristiiaanlp.github.io/ecos/cover.svg" />
+<meta name="twitter:image" content="https://cristiiaanlp.github.io/ecos/images/cover.png" />
 <title>ECOS — coordina con tus yos del pasado</title>
 <script>
   if ("serviceWorker" in navigator) {
@@ -242,23 +245,23 @@
 
   <section id="menu" class="screen active">
     <canvas id="menuFx"></canvas>
-    <button class="iconbtn" id="btnSettings" title="Ajustes">⚙️</button>
+    <button class="iconbtn" id="btnSettings" title="Ajustes" data-i18n-title="ttSettings">⚙️</button>
     <div class="menuwrap">
       <div class="logo">ECOS</div>
-      <p class="tagline">coordínate con tus yos del pasado</p>
+      <p class="tagline" data-i18n="tagline">coordínate con tus yos del pasado</p>
       <div class="menu">
-        <button class="btn primary" id="btnContinue"><span id="contLabel">▶  Jugar</span></button>
+        <button class="btn primary" id="btnContinue"><span id="contLabel" data-i18n="play">▶  Jugar</span></button>
         <div class="row2">
-          <button class="btn" data-go="levels">🗺️ Niveles</button>
-          <button class="btn" id="btnDaily">📅 Diario</button>
+          <button class="btn" data-go="levels" data-i18n="mLevels">🗺️ Niveles</button>
+          <button class="btn" id="btnDaily" data-i18n="mDaily">📅 Diario</button>
         </div>
         <div class="row2">
-          <button class="btn" data-go="editor">🛠️ Crear</button>
-          <button class="btn" id="btnCode">🔗 Código</button>
+          <button class="btn" data-go="editor" data-i18n="mCreate">🛠️ Crear</button>
+          <button class="btn" id="btnCode" data-i18n="mCode">🔗 Código</button>
         </div>
         <div class="row2">
-          <button class="btn ghost" data-go="howto">❔ Cómo jugar</button>
-          <button class="btn ghost" data-go="achievements">🏆 Logros</button>
+          <button class="btn ghost" data-go="howto" data-i18n="mHowto">❔ Cómo jugar</button>
+          <button class="btn ghost" data-go="achievements" data-i18n="mAch">🏆 Logros</button>
         </div>
       </div>
       <div class="progbar"><div class="progfill" id="progFill"></div></div>
@@ -267,21 +270,21 @@
   </section>
 
   <section id="howto" class="screen">
-    <div class="top"><button class="iconbtn" data-go="menu">‹</button><h2>Cómo se juega</h2></div>
-    <p class="lead">Llega al <b style="color:var(--green)">portal verde</b> 🟢. Pero a veces <b>no puedes solo</b>… así que cooperas con tus yos del pasado. Míralo en acción:</p>
+    <div class="top"><button class="iconbtn" data-go="menu">‹</button><h2 data-i18n="howtoTitle">Cómo se juega</h2></div>
+    <p class="lead" data-i18n-html="howtoLead">Llega al <b style="color:var(--green)">portal verde</b> 🟢. Pero a veces <b>no puedes solo</b>… así que cooperas con tus yos del pasado. Míralo en acción:</p>
     <canvas id="demoCv"></canvas>
     <div class="democap" id="demoCap"></div>
-    <div class="howsteps">
+    <div class="howsteps" data-i18n-html="howtoSteps">
       Flechas (o desliza) para moverte &nbsp;·&nbsp; <b style="color:var(--teal)">⟲</b> crea un eco &nbsp;·&nbsp; <b>esperar</b> = pasa un turno
     </div>
-    <button class="btn primary" data-go="levels">¡Vamos a jugar!</button>
+    <button class="btn primary" data-go="levels" data-i18n="howtoGo">¡Vamos a jugar!</button>
   </section>
 
   <section id="levels" class="screen">
     <div class="top">
       <button class="iconbtn" data-go="menu">‹</button>
-      <h2>Niveles</h2>
-      <button class="iconbtn" id="muteBtn" title="Sonido">🔊</button>
+      <h2 data-i18n="levelsTitle">Niveles</h2>
+      <button class="iconbtn" id="muteBtn" title="Sonido" data-i18n-title="ttSound">🔊</button>
     </div>
     <div class="grid" id="lvlGrid"></div>
   </section>
@@ -290,9 +293,9 @@
     <div class="hud">
       <button class="iconbtn" data-go="levels">‹</button>
       <div class="lname" id="lvlName">Nivel</div>
-      <div class="chip">ecos <b id="hudEchoes">0</b><span id="hudPar" style="color:var(--dim)"></span></div>
-      <div class="chip">pasos <b id="hudSteps">0</b></div>
-      <button class="iconbtn" id="btnHint" title="Pista">💡</button>
+      <div class="chip"><span data-i18n="chipEchoes">ecos</span> <b id="hudEchoes">0</b><span id="hudPar" style="color:var(--dim)"></span></div>
+      <div class="chip"><span data-i18n="chipSteps">pasos</span> <b id="hudSteps">0</b></div>
+      <button class="iconbtn" id="btnHint" title="Pista" data-i18n-title="ttHint">💡</button>
     </div>
     <div class="stage"><canvas id="cv"></canvas></div>
     <div class="hint" id="hint"></div>
@@ -302,16 +305,16 @@
         <div class="key" data-act="U">▲</div>
         <div class="key empty"></div>
         <div class="key" data-act="L">◀</div>
-        <div class="key wait" data-act="W">esperar</div>
+        <div class="key wait" data-act="W" data-i18n="wait">esperar</div>
         <div class="key" data-act="R">▶</div>
         <div class="key empty"></div>
         <div class="key" data-act="D">▼</div>
         <div class="key empty"></div>
       </div>
       <div class="actions">
-        <button class="abtn echo" data-fn="echo"><span class="big">⟲</span><small>crear eco</small></button>
-        <button class="abtn" data-fn="undo"><span class="big">↶</span><small>deshacer</small></button>
-        <button class="abtn" data-fn="restart"><span class="big">⟳</span><small>reiniciar</small></button>
+        <button class="abtn echo" data-fn="echo"><span class="big">⟲</span><small data-i18n="aEcho">crear eco</small></button>
+        <button class="abtn" data-fn="undo"><span class="big">↶</span><small data-i18n="aUndo">deshacer</small></button>
+        <button class="abtn" data-fn="restart"><span class="big">⟳</span><small data-i18n="aRestart">reiniciar</small></button>
       </div>
     </div>
   </section>
@@ -319,54 +322,54 @@
   <section id="editor" class="screen">
     <div class="top">
       <button class="iconbtn" data-go="menu">‹</button>
-      <h2>Crear nivel</h2>
-      <button class="iconbtn" id="edSize" title="Tamaño">⤢</button>
+      <h2 data-i18n="edTitle">Crear nivel</h2>
+      <button class="iconbtn" id="edSize" title="Tamaño" data-i18n-title="ttSize">⤢</button>
     </div>
     <div class="edtools" id="edTools"></div>
     <div class="edcolors" id="edColors"></div>
     <div class="stage"><div id="edGridWrap"></div></div>
     <div class="edbar">
-      <button class="btn" id="edClear">Limpiar</button>
-      <button class="btn" id="edShare">🔗 Compartir</button>
-      <button class="btn primary" id="edPlay">Probar ▶</button>
+      <button class="btn" id="edClear" data-i18n="edClear">Limpiar</button>
+      <button class="btn" id="edShare" data-i18n="edShare">🔗 Compartir</button>
+      <button class="btn primary" id="edPlay" data-i18n="edPlay">Probar ▶</button>
     </div>
   </section>
 
   <section id="achievements" class="screen">
-    <div class="top"><button class="iconbtn" data-go="menu">‹</button><h2>Logros</h2></div>
+    <div class="top"><button class="iconbtn" data-go="menu">‹</button><h2 data-i18n="achTitle">Logros</h2></div>
     <div class="achlist" id="achList"></div>
   </section>
 </div>
 
 <div class="overlay" id="winOverlay">
   <div class="card">
-    <h2 id="winTitle">¡Nivel resuelto!</h2>
+    <h2 id="winTitle" data-i18n="winSolved">¡Nivel resuelto!</h2>
     <div class="starbig" id="winStars">★★★</div>
     <div class="stats">
-      <div class="stat"><b id="winEchoes">0</b><span>ecos usados</span></div>
-      <div class="stat"><b id="winSteps">0</b><span>pasos totales</span></div>
+      <div class="stat"><b id="winEchoes">0</b><span data-i18n="winEchoesLbl">ecos usados</span></div>
+      <div class="stat"><b id="winSteps">0</b><span data-i18n="winStepsLbl">pasos totales</span></div>
     </div>
     <div class="cardbtns">
-      <button class="btn primary" id="btnNext">Siguiente ▶</button>
+      <button class="btn primary" id="btnNext" data-i18n="btnNext">Siguiente ▶</button>
       <div class="row2">
-        <button class="btn" id="btnReplay">Reintentar</button>
-        <button class="btn" id="btnShare">Compartir</button>
+        <button class="btn" id="btnReplay" data-i18n="btnReplay">Reintentar</button>
+        <button class="btn" id="btnShare" data-i18n="btnShare">Compartir</button>
       </div>
-      <button class="btn ghost" data-go="levels">Menú de niveles</button>
+      <button class="btn ghost" data-go="levels" data-i18n="btnLevelsMenu">Menú de niveles</button>
     </div>
   </div>
 </div>
 
 <div class="overlay" id="codeOverlay">
   <div class="card">
-    <h2 id="codeTitle">Jugar con código</h2>
-    <p class="codehelp" id="codeHelp">Pega el código que te han pasado:</p>
+    <h2 id="codeTitle" data-i18n="codeEntryTitle">Jugar con código</h2>
+    <p class="codehelp" id="codeHelp" data-i18n="codeEntryHelp">Pega el código que te han pasado:</p>
     <textarea id="codeInput" class="codebox" placeholder="ECOS1...." spellcheck="false" autocomplete="off"></textarea>
     <div class="cardbtns">
-      <button class="btn primary" id="codeAction">Jugar ▶</button>
+      <button class="btn primary" id="codeAction" data-i18n="codePlay">Jugar ▶</button>
       <div class="row2">
-        <button class="btn" id="codePaste">📋 Pegar</button>
-        <button class="btn ghost" id="codeClose">Cerrar</button>
+        <button class="btn" id="codePaste" data-i18n="codePaste">📋 Pegar</button>
+        <button class="btn ghost" id="codeClose" data-i18n="codeClose">Cerrar</button>
       </div>
     </div>
   </div>
@@ -374,38 +377,38 @@
 
 <div class="overlay" id="settingsOverlay">
   <div class="card">
-    <h2>Ajustes ⚙️</h2>
+    <h2 data-i18n="setTitle">Ajustes ⚙️</h2>
     <div class="setlist" id="setList"></div>
     <div class="cardbtns">
-      <button class="btn" id="setReset">🗑️ Reiniciar progreso</button>
-      <button class="btn primary" id="setClose">Cerrar</button>
+      <button class="btn" id="setReset" data-i18n="setReset">🗑️ Reiniciar progreso</button>
+      <button class="btn primary" id="setClose" data-i18n="setClose">Cerrar</button>
     </div>
   </div>
 </div>
 
 <div class="overlay" id="adOverlay">
   <div class="card">
-    <h2>💡 Pista</h2>
+    <h2 data-i18n="hintTitle">💡 Pista</h2>
     <div id="adIntro">
-      <p class="codehelp">Mira un anuncio corto y te enseñamos cómo superar el nivel: la <b style="color:var(--gold)">ruta hasta la salida</b> y la estrategia.</p>
+      <p class="codehelp" data-i18n-html="adIntro">Mira un anuncio corto y te enseñamos cómo superar el nivel: la <b style="color:var(--gold)">ruta hasta la salida</b> y la estrategia.</p>
       <div class="cardbtns">
-        <button class="btn primary" id="adWatch">▶ Ver anuncio</button>
-        <button class="btn ghost" id="adCancel">Ahora no</button>
+        <button class="btn primary" id="adWatch" data-i18n="adWatch">▶ Ver anuncio</button>
+        <button class="btn ghost" id="adCancel" data-i18n="adCancel">Ahora no</button>
       </div>
     </div>
     <div id="adPlaying" style="display:none">
-      <div class="adbox"><span class="adtag">Anuncio</span>Tu publicidad aquí</div>
+      <div class="adbox"><span class="adtag" data-i18n="adTag">Anuncio</span><span data-i18n="adPlaceholder">Tu publicidad aquí</span></div>
       <p class="codehelp" id="adCount">Tu pista en 5…</p>
-      <button class="btn primary" id="adClaim" disabled>Reclamar pista 💡</button>
+      <button class="btn primary" id="adClaim" disabled data-i18n="adClaim">Reclamar pista 💡</button>
     </div>
   </div>
 </div>
 
 <div class="overlay" id="interOverlay">
   <div class="card">
-    <div class="adbox" style="height:180px"><span class="adtag">Anuncio</span>Tu publicidad aquí</div>
+    <div class="adbox" style="height:180px"><span class="adtag" data-i18n="adTag">Anuncio</span><span data-i18n="adPlaceholder">Tu publicidad aquí</span></div>
     <p class="codehelp" id="interCount">Continúas en 4…</p>
-    <button class="btn primary" id="interGo" disabled>Continuar ▶</button>
+    <button class="btn primary" id="interGo" disabled data-i18n="interGo">Continuar ▶</button>
   </div>
 </div>
 
@@ -414,6 +417,244 @@
 
 <script>
 "use strict";
+
+/* ╔════════════════════════════════════════════════════════════════════════════╗
+   ║  CONFIG — credenciales + objetivo de compilación (build).                   ║
+   ║                                                                             ║
+   ║  BUILD: "auto" detecta el portal por el dominio donde se sirve el juego.    ║
+   ║         Fuérzalo a "self" / "poki" / "crazygames" si lo necesitas.          ║
+   ║    • "self"        → tu web (GitHub Pages, dominio propio): AdSense+Stripe.  ║
+   ║    • "poki"        → Poki: usa el Poki SDK (sus anuncios). SIN AdSense ni    ║
+   ║                      Stripe (los portales NO permiten publicidad propia).   ║
+   ║    • "crazygames"  → CrazyGames: usa el CrazyGames SDK (sus anuncios).       ║
+   ║                                                                             ║
+   ║  ADSENSE_CLIENT / STRIPE_PAYMENT_LINK: SOLO se usan en el build "self".      ║
+   ╚════════════════════════════════════════════════════════════════════════════╝ */
+const CONFIG = {
+  BUILD:               "auto", // "auto" | "self" | "poki" | "crazygames"
+  ADSENSE_CLIENT:      "",      // p.ej. "ca-pub-1234567890123456"  (solo build self)
+  STRIPE_PAYMENT_LINK: "",      // p.ej. "https://buy.stripe.com/xxxxxxxx" (solo build self)
+  GAME_URL:            "https://cristiiaanlp.github.io/ecos/"
+};
+function detectBuild(){
+  if(CONFIG.BUILD && CONFIG.BUILD!=="auto") return CONFIG.BUILD;
+  const h=(location.hostname||"").toLowerCase();
+  if(h.indexOf("poki")>=0) return "poki";
+  if(h.indexOf("crazygames")>=0) return "crazygames";
+  return "self";
+}
+const BUILD = detectBuild();
+const IS_PORTAL = BUILD==="poki" || BUILD==="crazygames";
+
+/* ===================== I18N (ES / EN) ===================== */
+const I18N = {
+  es: {
+    htmlLang:"es",
+    metaTitle:"ECOS — coordina con tus yos del pasado",
+    metaDesc:"ECOS: un puzzle web donde cooperas contigo mismo a través del tiempo. 155 niveles, reto diario, editor y modo sin conexión.",
+    tagline:"coordínate con tus yos del pasado",
+    play:"▶  Jugar", continueLvl:"▶  Continuar · Nivel {n}",
+    mLevels:"🗺️ Niveles", mDaily:"📅 Diario", mCreate:"🛠️ Crear", mCode:"🔗 Código",
+    mHowto:"❔ Cómo jugar", mAch:"🏆 Logros",
+    menuProg:"{done}/{total} niveles · ⭐ {stars}/{maxStars}", streakSuffix:"  ·  🔥 {streak}",
+    levelsShort:"{total} niveles",
+    howtoTitle:"Cómo se juega",
+    howtoLead:"Llega al <b style=\"color:var(--green)\">portal verde</b> 🟢. Pero a veces <b>no puedes solo</b>… así que cooperas con tus yos del pasado. Míralo en acción:",
+    howtoSteps:"Flechas (o desliza) para moverte &nbsp;·&nbsp; <b style=\"color:var(--teal)\">⟲</b> crea un eco &nbsp;·&nbsp; <b>esperar</b> = pasa un turno",
+    howtoGo:"¡Vamos a jugar!",
+    levelsTitle:"Niveles", ttSound:"Sonido", ttHint:"Pista", ttSettings:"Ajustes", ttSize:"Tamaño",
+    chipEchoes:"ecos", chipSteps:"pasos", wait:"esperar",
+    aEcho:"crear eco", aUndo:"deshacer", aRestart:"reiniciar",
+    lvlNameFallback:"Nivel", dailyTitle:"📅 Reto del día",
+    sharedLevelTitle:"🔗 Nivel compartido", yourLevelTitle:"🛠️ Tu nivel",
+    youLabel:"TÚ", echoLabel:"eco {n}", echoShort:"eco",
+    nameTut:["Primeros pasos","Mantén la puerta","Sin salida","Dos cerrojos","Dominó","Tres en raya"],
+    nameBox:["Empuja","Caja y botón","El rodeo","Doble carga","Almacén"], boxesShort:"Cajas",
+    h_hand0:"Esto es lo básico: llega al portal verde. Usa las flechas.",
+    h_hand1:"Una puerta de color cierra el paso. Pisa el botón de su color para abrirla.",
+    h_hand2:"Si bajas al botón, te quedas encerrado. ¿Y si un eco lo pisa mientras tú cruzas?",
+    h_hand3:"Dos botones, dos puertas seguidas. Manda un eco a cada botón y cruza con el último yo.",
+    h_hand4:"Efecto dominó: un botón abre la puerta que esconde el siguiente. Encadénalos.",
+    h_hand5:"Gran final del tutorial: tres botones, tres puertas. Coordina a todos tus yos.",
+    h_box0:"¡NUEVO! 📦 Empuja la caja sobre el botón: lo mantiene pulsado sin gastar un eco.",
+    h_box1:"Una caja sobre un botón abre su puerta para siempre. Empújala y rodea hasta la salida.",
+    h_box2:"Coloca la caja, abre la puerta y da el rodeo hasta el portal.",
+    h_box3:"Dos cajas, dos botones. Y si te atascas… ¡combina cajas con ecos!",
+    h_box4:"Almacén: tres cajas que colocar. El gran final de las cajas.",
+    h_chambersChained:"Cámaras encadenadas: abre puerta a puerta, en orden, con tus ecos.",
+    h_chambersFree:"Pisa los {k} botones de la primera sala (un eco cada uno) y cruza las salas.",
+    h_genChained:"Cadena de {k}: cada botón abre la siguiente puerta. Colócate en orden con tus ecos.",
+    h_genFree:"Manda un eco a cada botón ({k}) para abrir las puertas, y cruza con tu último yo.",
+    coach1:"¡La puerta se abrió mientras pisas el botón! Pero si te marchas se cierra. Pulsa ⟲ para crear un eco que lo mantenga.",
+    echoCreatedHint:"⟲ ECO creado. Mira su rastro de color: repetirá esos pasos. Ahora ve TÚ a cruzar la puerta.",
+    moveFirst:"Muévete antes de crear un eco", echoCreated:"Eco creado — ¡tu pasado te repite!",
+    stuckHint:"¿Atascado? Pulsa 💡 para una pista", copied:"¡Copiado! 📋", copiedLink:"¡Copiado! 🔗",
+    pasteFirst:"Pega un código primero", noStartExit:"El código no tiene inicio/salida",
+    noSolution:"Ese nivel no tiene solución 🤔", invalidCode:"Código inválido",
+    pasteManually:"Pega el código a mano (Ctrl+V)", needStartExit:"Pon un Inicio 🙂 y una Salida 🟢",
+    edNoSolution:"Aún no tiene solución: revisa botones y puertas 🤔", progressReset:"Progreso reiniciado",
+    achToast:"🏆 Logro: {name}", hintUnlocked:"Pista desbloqueada 💡", noAd:"No hay anuncio disponible ahora",
+    thanksRemoveAds:"¡Gracias por tu compra! Anuncios eliminados 🙌", thanksRemoveAds2:"¡Gracias! Anuncios eliminados 🙌",
+    winSolved:"¡Nivel resuelto!", winFinished:"¡Has terminado ECOS! 🎉", winCustom:"¡Nivel superado!",
+    winEchoesLbl:"ecos usados", winStepsLbl:"pasos totales",
+    btnNext:"Siguiente ▶", btnReplay:"Reintentar", btnShare:"Compartir", btnLevelsMenu:"Menú de niveles",
+    shareCustom:"ECOS · Nivel compartido", shareDaily:"ECOS · Reto del día", shareLevel:"ECOS · Nivel {n}",
+    shareStats:"{e} ecos · {s} pasos", sharePlay:"Juega: {url}",
+    shareImgCustom:"Nivel compartido", shareImgDaily:"Reto del día", shareImgLevel:"Nivel {n}",
+    edTitle:"Crear nivel",
+    edWall:"Muro", edFloor:"Suelo", edStart:"Inicio", edExit:"Salida", edButton:"Botón", edDoor:"Puerta", edBox:"📦 Caja", edErase:"Borrar",
+    edClear:"Limpiar", edShare:"🔗 Compartir", edPlay:"Probar ▶", edPlayTitle:"🛠️ Tu nivel", customName:"Personalizado", customHint:"Nivel personalizado",
+    codeEntryTitle:"Jugar con código 🔗", codeEntryHelp:"Pega aquí el código que te han pasado:", codePlay:"Jugar ▶",
+    codeShareTitle:"¡Nivel listo! 🎉", codeShareHelp:"Copia este código y compártelo. Quien lo pegue jugará tu nivel:",
+    codeCopy:"📋 Copiar código", codePaste:"📋 Pegar", codeClose:"Cerrar", codeSharedTitle:"🔗 Nivel compartido",
+    setTitle:"Ajustes ⚙️", setSound:"🔊 Sonido", setMusic:"🎵 Música", setVibrate:"📳 Vibración", setAnim:"✨ Animaciones", setLangLbl:"🌐 Idioma",
+    setReset:"🗑️ Reiniciar progreso", setClose:"Cerrar", resetConfirm:"¿Borrar todo tu progreso, estrellas y logros?",
+    removeAds:"🚫 Quitar anuncios", removeAdsDone:"🚫 Anuncios eliminados ✅", purchaseConfirm:"Quitar anuncios para siempre por 1,99 € (compra SIMULADA en esta versión).",
+    hintTitle:"💡 Pista",
+    adIntro:"Mira un anuncio corto y te enseñamos cómo superar el nivel: la <b style=\"color:var(--gold)\">ruta hasta la salida</b> y la estrategia.",
+    adWatch:"▶ Ver anuncio", adCancel:"Ahora no", adTag:"Anuncio", adPlaceholder:"Tu publicidad aquí",
+    adCountdown:"Tu pista en {n}…", adClaim:"Reclamar pista 💡", adReady:"¡Listo! Reclama tu pista 👇",
+    adLoading:"Cargando anuncio…", adPlayNow:"Anuncio listo, reprodúcelo 👇",
+    interCountdown:"Continúas en {n}…", interGo:"Continuar ▶", interThanks:"¡Gracias por tu apoyo! 🙌",
+    demo1:"1️⃣ Caminas hasta el botón → la puerta de su color se abre",
+    demo2:"…pero si te marchas, la puerta se cierra otra vez 😕",
+    demo3:"2️⃣ Pulsas ⟲ : tu recorrido se vuelve un ECO que repite tus pasos y mantiene el botón",
+    demo4:"3️⃣ Mientras el eco pisa el botón, TÚ cruzas la puerta abierta →",
+    demo5:"✅ ¡Llegas a la salida cooperando contigo mismo en el tiempo!",
+    achTitle:"Logros",
+    w_tutorial:"Tutorial", w_apprentice:"Aprendiz", w_gears:"Engranajes", w_clock:"Relojero", w_master:"Maestro del tiempo", w_legend:"Leyenda", w_boxes:"📦 Cajas (bonus)",
+    gateLocked:"🔒 {have}/{need}⭐",
+    ach_first_n:"Primer eco", ach_first_d:"Resuelve tu primer nivel.",
+    ach_ten_n:"Cogiendo el truco", ach_ten_d:"Resuelve 10 niveles.",
+    ach_fifty_n:"Relojero", ach_fifty_d:"Resuelve 50 niveles.",
+    ach_hundred_n:"Viajero del tiempo", ach_hundred_d:"Resuelve 100 niveles.",
+    ach_perfect_n:"Impecable", ach_perfect_d:"Consigue 3★ en un nivel.",
+    ach_nopain_n:"Sin titubeos", ach_nopain_d:"Resuelve un nivel sin usar deshacer.",
+    ach_streak3_n:"Constante", ach_streak3_d:"Racha de 3 días en el reto diario.",
+    ach_creator_n:"Arquitecto", ach_creator_d:"Comparte un nivel que hayas creado.",
+    ach_legend_n:"Leyenda", ach_legend_d:"Completa el nivel 150.",
+    hintBoxes:"💡 Empuja las cajas 📦 sobre los botones para abrir las puertas y sigue la ruta dorada hasta la salida.",
+    hintChained:"💡 Encadénalos: pisa primero el botón más cercano al inicio y, eco a eco, ve abriendo la puerta siguiente en orden. Cruza al final por la ruta dorada (~{n} ecos).",
+    hintSimpleNone:"💡 Solo tienes que llegar a la salida siguiendo la ruta dorada.",
+    hintSimple:"💡 Manda un eco a cada botón ({b}) para mantener abiertas las puertas y cruza con tu último yo por la ruta dorada (~{n} ecos).",
+  },
+  en: {
+    htmlLang:"en",
+    metaTitle:"ECOS — co-op with your past selves",
+    metaDesc:"ECOS: a web puzzle where you cooperate with yourself across time. 155 levels, daily challenge, level editor and offline mode.",
+    tagline:"team up with your past selves",
+    play:"▶  Play", continueLvl:"▶  Continue · Level {n}",
+    mLevels:"🗺️ Levels", mDaily:"📅 Daily", mCreate:"🛠️ Create", mCode:"🔗 Code",
+    mHowto:"❔ How to play", mAch:"🏆 Achievements",
+    menuProg:"{done}/{total} levels · ⭐ {stars}/{maxStars}", streakSuffix:"  ·  🔥 {streak}",
+    levelsShort:"{total} levels",
+    howtoTitle:"How to play",
+    howtoLead:"Reach the <b style=\"color:var(--green)\">green portal</b> 🟢. But sometimes <b>you can't do it alone</b>… so you team up with your past selves. See it in action:",
+    howtoSteps:"Arrows (or swipe) to move &nbsp;·&nbsp; <b style=\"color:var(--teal)\">⟲</b> creates an echo &nbsp;·&nbsp; <b>wait</b> = skip a turn",
+    howtoGo:"Let's play!",
+    levelsTitle:"Levels", ttSound:"Sound", ttHint:"Hint", ttSettings:"Settings", ttSize:"Size",
+    chipEchoes:"echoes", chipSteps:"steps", wait:"wait",
+    aEcho:"new echo", aUndo:"undo", aRestart:"restart",
+    lvlNameFallback:"Level", dailyTitle:"📅 Daily challenge",
+    sharedLevelTitle:"🔗 Shared level", yourLevelTitle:"🛠️ Your level",
+    youLabel:"YOU", echoLabel:"echo {n}", echoShort:"echo",
+    nameTut:["First steps","Hold the door","No way out","Two locks","Domino","Tic-tac-toe"],
+    nameBox:["Push","Box & button","The detour","Double load","Warehouse"], boxesShort:"Boxes",
+    h_hand0:"The basics: reach the green portal. Use the arrow keys.",
+    h_hand1:"A colored door blocks the way. Step on the button of its color to open it.",
+    h_hand2:"Go down to the button and you're trapped. What if an echo holds it while you cross?",
+    h_hand3:"Two buttons, two doors in a row. Send an echo to each button and cross as your last self.",
+    h_hand4:"Domino effect: each button opens the door that hides the next one. Chain them.",
+    h_hand5:"Tutorial finale: three buttons, three doors. Coordinate all your selves.",
+    h_box0:"NEW! 📦 Push the box onto the button: it stays pressed without spending an echo.",
+    h_box1:"A box on a button keeps its door open forever. Push it and go around to the exit.",
+    h_box2:"Place the box, open the door and take the detour to the portal.",
+    h_box3:"Two boxes, two buttons. And if you get stuck… combine boxes with echoes!",
+    h_box4:"Warehouse: three boxes to place. The grand finale of the boxes.",
+    h_chambersChained:"Chained chambers: open door by door, in order, with your echoes.",
+    h_chambersFree:"Step on the {k} buttons in the first room (one echo each) and cross the rooms.",
+    h_genChained:"Chain of {k}: each button opens the next door. Line up in order with your echoes.",
+    h_genFree:"Send an echo to each button ({k}) to open the doors, and cross as your last self.",
+    coach1:"The door opened while you press the button! But it closes if you leave. Tap ⟲ to create an echo that holds it.",
+    echoCreatedHint:"⟲ ECHO created. Watch its colored trail: it will repeat those steps. Now YOU go cross the door.",
+    moveFirst:"Move before creating an echo", echoCreated:"Echo created — your past repeats you!",
+    stuckHint:"Stuck? Tap 💡 for a hint", copied:"Copied! 📋", copiedLink:"Copied! 🔗",
+    pasteFirst:"Paste a code first", noStartExit:"The code has no start/exit",
+    noSolution:"That level has no solution 🤔", invalidCode:"Invalid code",
+    pasteManually:"Paste the code manually (Ctrl+V)", needStartExit:"Add a Start 🙂 and an Exit 🟢",
+    edNoSolution:"No solution yet: check buttons and doors 🤔", progressReset:"Progress reset",
+    achToast:"🏆 Achievement: {name}", hintUnlocked:"Hint unlocked 💡", noAd:"No ad available right now",
+    thanksRemoveAds:"Thanks for your purchase! Ads removed 🙌", thanksRemoveAds2:"Thanks! Ads removed 🙌",
+    winSolved:"Level solved!", winFinished:"You finished ECOS! 🎉", winCustom:"Level cleared!",
+    winEchoesLbl:"echoes used", winStepsLbl:"total steps",
+    btnNext:"Next ▶", btnReplay:"Retry", btnShare:"Share", btnLevelsMenu:"Level menu",
+    shareCustom:"ECOS · Shared level", shareDaily:"ECOS · Daily challenge", shareLevel:"ECOS · Level {n}",
+    shareStats:"{e} echoes · {s} steps", sharePlay:"Play: {url}",
+    shareImgCustom:"Shared level", shareImgDaily:"Daily challenge", shareImgLevel:"Level {n}",
+    edTitle:"Create level",
+    edWall:"Wall", edFloor:"Floor", edStart:"Start", edExit:"Exit", edButton:"Button", edDoor:"Door", edBox:"📦 Box", edErase:"Erase",
+    edClear:"Clear", edShare:"🔗 Share", edPlay:"Test ▶", edPlayTitle:"🛠️ Your level", customName:"Custom", customHint:"Custom level",
+    codeEntryTitle:"Play with a code 🔗", codeEntryHelp:"Paste the code you were given here:", codePlay:"Play ▶",
+    codeShareTitle:"Level ready! 🎉", codeShareHelp:"Copy this code and share it. Anyone who pastes it plays your level:",
+    codeCopy:"📋 Copy code", codePaste:"📋 Paste", codeClose:"Close", codeSharedTitle:"🔗 Shared level",
+    setTitle:"Settings ⚙️", setSound:"🔊 Sound", setMusic:"🎵 Music", setVibrate:"📳 Vibration", setAnim:"✨ Animations", setLangLbl:"🌐 Language",
+    setReset:"🗑️ Reset progress", setClose:"Close", resetConfirm:"Delete all your progress, stars and achievements?",
+    removeAds:"🚫 Remove ads", removeAdsDone:"🚫 Ads removed ✅", purchaseConfirm:"Remove ads forever for €1.99 (SIMULATED purchase in this version).",
+    hintTitle:"💡 Hint",
+    adIntro:"Watch a short ad and we'll show you how to beat the level: the <b style=\"color:var(--gold)\">route to the exit</b> and the strategy.",
+    adWatch:"▶ Watch ad", adCancel:"Not now", adTag:"Ad", adPlaceholder:"Your ad here",
+    adCountdown:"Your hint in {n}…", adClaim:"Claim hint 💡", adReady:"Ready! Claim your hint 👇",
+    adLoading:"Loading ad…", adPlayNow:"Ad ready, play it 👇",
+    interCountdown:"Continue in {n}…", interGo:"Continue ▶", interThanks:"Thanks for your support! 🙌",
+    demo1:"1️⃣ You walk to the button → the door of its color opens",
+    demo2:"…but if you leave, the door closes again 😕",
+    demo3:"2️⃣ You tap ⟲ : your path becomes an ECHO that repeats your steps and holds the button",
+    demo4:"3️⃣ While the echo presses the button, YOU cross the open door →",
+    demo5:"✅ You reach the exit by cooperating with yourself across time!",
+    achTitle:"Achievements",
+    w_tutorial:"Tutorial", w_apprentice:"Apprentice", w_gears:"Gears", w_clock:"Watchmaker", w_master:"Time Master", w_legend:"Legend", w_boxes:"📦 Boxes (bonus)",
+    gateLocked:"🔒 {have}/{need}⭐",
+    ach_first_n:"First echo", ach_first_d:"Solve your first level.",
+    ach_ten_n:"Getting the hang of it", ach_ten_d:"Solve 10 levels.",
+    ach_fifty_n:"Watchmaker", ach_fifty_d:"Solve 50 levels.",
+    ach_hundred_n:"Time traveler", ach_hundred_d:"Solve 100 levels.",
+    ach_perfect_n:"Flawless", ach_perfect_d:"Get 3★ on a level.",
+    ach_nopain_n:"No hesitation", ach_nopain_d:"Solve a level without using undo.",
+    ach_streak3_n:"Consistent", ach_streak3_d:"3-day streak in the daily challenge.",
+    ach_creator_n:"Architect", ach_creator_d:"Share a level you created.",
+    ach_legend_n:"Legend", ach_legend_d:"Complete level 150.",
+    hintBoxes:"💡 Push the boxes 📦 onto the buttons to open the doors and follow the golden route to the exit.",
+    hintChained:"💡 Chain them: first step on the button nearest the start and, echo by echo, open the next door in order. Cross at the end along the golden route (~{n} echoes).",
+    hintSimpleNone:"💡 You just need to reach the exit following the golden route.",
+    hintSimple:"💡 Send an echo to each button ({b}) to keep the doors open and cross as your last self along the golden route (~{n} echoes).",
+  }
+};
+let LANG=(()=>{ try{ const s=localStorage.getItem("ecos_lang"); if(s==="es"||s==="en") return s; }catch(e){}
+  const n=(navigator.language||navigator.userLanguage||"es").slice(0,2).toLowerCase(); return n==="es"?"es":"en"; })();
+function t(k,p){ const d=I18N[LANG]||I18N.es; let s=(d[k]!=null?d[k]:(I18N.es[k]!=null?I18N.es[k]:k));
+  if(p && typeof s==="string") for(const kk in p) s=s.split("{"+kk+"}").join(p[kk]); return s; }
+function applyI18n(){
+  document.documentElement.lang=t("htmlLang");
+  document.title=t("metaTitle");
+  const md=document.querySelector('meta[name="description"]'); if(md) md.setAttribute("content", t("metaDesc"));
+  document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent=t(el.dataset.i18n); });
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{ el.innerHTML=t(el.dataset.i18nHtml); });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{ el.placeholder=t(el.dataset.i18nPh); });
+  document.querySelectorAll("[data-i18n-title]").forEach(el=>{ el.title=t(el.dataset.i18nTitle); });
+}
+function setLang(l){
+  LANG=(l==="es")?"es":"en"; try{localStorage.setItem("ecos_lang",LANG);}catch(e){}
+  for(const k in levelCache) delete levelCache[k];   // los hints traducidos se recalculan
+  applyI18n(); updateMenu();
+  if(document.getElementById("levels").classList.contains("active")) buildGrid();
+  if(document.getElementById("achievements").classList.contains("active")) buildAchievements();
+  if(G && document.getElementById("game").classList.contains("active") && !G.solved){
+    const lv=G.lv; setHint(G.hintOn?hintText(lv):lv.hint, false);
+    document.getElementById("hudPar").textContent=" /"+lv.par;
+  }
+  buildSettings();
+}
+
 /* ===================== ECOS ===================== */
 const TOTAL_LEVELS = 155;
 const PALETTE = ["#22d3ee","#e879f9","#fbbf24","#a3e635","#fb7185","#60a5fa"];
@@ -427,31 +668,31 @@ const key = (r,c)=>r+","+c;
 
 /* ---- niveles hechos a mano (#muro .suelo S inicio E salida 1-4 botón a-d puerta) ---- */
 const HAND_GRIDS = [
-  { par:1, hint:"Esto es lo básico: llega al portal verde. Usa las flechas.", grid:[
+  { par:1, hint:"h_hand0", grid:[
     "#######","#S...E#","#######" ]},
-  { par:2, hint:"Una puerta de color cierra el paso. Pisa el botón de su color para abrirla.", grid:[
+  { par:2, hint:"h_hand1", grid:[
     "#######","#1S...#","###.###","#E.a..#","#######" ]},
-  { par:2, hint:"Si bajas al botón, te quedas encerrado. ¿Y si un eco lo pisa mientras tú cruzas?", grid:[
+  { par:2, hint:"h_hand2", grid:[
     "#######","#S.a.E#","#.#####","#1#####","#######" ]},
-  { par:3, hint:"Dos botones, dos puertas seguidas. Manda un eco a cada botón y cruza con el último yo.", grid:[
+  { par:3, hint:"h_hand3", grid:[
     "#########","#..1S2..#","####.####","#...a...#","####.####","#...b...#","#...E...#","#########" ]},
-  { par:3, hint:"Efecto dominó: un botón abre la puerta que esconde el siguiente. Encadénalos.", grid:[
+  { par:3, hint:"h_hand4", grid:[
     "###########","#E.a.....S#","#.#######.#","#1.b....2.#","###########" ]},
-  { par:4, hint:"Gran final del tutorial: tres botones, tres puertas. Coordina a todos tus yos.", grid:[
+  { par:4, hint:"h_hand5", grid:[
     "#########","#1.2S3..#","####.####","#...a...#","####.####","#...b...#","####.####","#...c...#","#...E...#","#########" ]},
 ];
 
 /* ---- mundo "Cajas" (B = caja empujable) — todos resueltos por el solver ---- */
 const BOX_GRIDS = [
-  { par:1, hint:"¡NUEVO! 📦 Empuja la caja sobre el botón: lo mantiene pulsado sin gastar un eco.", grid:[
+  { par:1, hint:"h_box0", grid:[
     "######","#1..E#","#B##a#","#S...#","######" ]},
-  { par:1, hint:"Una caja sobre un botón abre su puerta para siempre. Empújala y rodea hasta la salida.", grid:[
+  { par:1, hint:"h_box1", grid:[
     "#######","#1...E#","#B###a#","#S....#","#######" ]},
-  { par:1, hint:"Coloca la caja, abre la puerta y da el rodeo hasta el portal.", grid:[
+  { par:1, hint:"h_box2", grid:[
     "########","#1.....#","#B####E#","#S....a#","########" ]},
-  { par:2, hint:"Dos cajas, dos botones. Y si te atascas… ¡combina cajas con ecos!", grid:[
+  { par:2, hint:"h_box3", grid:[
     "#########","#1.....E#","#B#####a#","#S......#","#2#####b#","#B......#","#########" ]},
-  { par:2, hint:"Almacén: tres cajas que colocar. El gran final de las cajas.", grid:[
+  { par:2, hint:"h_box4", grid:[
     "##########","#1......E#","#B######a#","#S.......#","#2######b#","#B.......#","#3######c#","#B.......#","##########" ]},
 ];
 
@@ -473,7 +714,7 @@ function parseRows(g){
   return {R,C,wall,bId,dId,spawn,exit,buttons,doors,boxes};
 }
 function levelFromGrid(def, idx){
-  return Object.assign(parseRows(def.grid), {name:`Nivel ${idx+1}`, par:def.par, hint:def.hint, gen:false});
+  return Object.assign(parseRows(def.grid), {name:`${t("lvlNameFallback")} ${idx+1}`, par:def.par, hint:t(def.hint), gen:false});
 }
 
 /* ---- generador (niveles 7..100), siempre resoluble: "sala de botones + serpiente con puertas" ---- */
@@ -503,9 +744,8 @@ function genChambers(rng, n, K){
   } else {
     for(let j=0;j<K;j++){ const c=shuffle(cellsOf(j).filter(free)).pop(); bId[c.r][c.c]=j; buttons.push({r:c.r,c:c.c,id:j}); }
   }
-  const hint = chained ? "Cámaras encadenadas: abre puerta a puerta, en orden, con tus ecos."
-                       : `Pisa los ${K} botones de la primera sala (un eco cada uno) y cruza las salas.`;
-  return {name:`Nivel ${n}`, par:K+1, hint, R,C,wall,bId,dId,spawn,exit,buttons,doors, gen:true, chained};
+  const hint = chained ? t("h_chambersChained") : t("h_chambersFree",{k:K});
+  return {name:`${t("lvlNameFallback")} ${n}`, par:K+1, hint, R,C,wall,bId,dId,spawn,exit,buttons,doors, gen:true, chained};
 }
 
 function tryGen(n, attempt){
@@ -562,10 +802,8 @@ function tryGen(n, attempt){
       const cell=path[bi]; bId[cell.r][cell.c]=i; buttons.push({r:cell.r,c:cell.c,id:i});
     }
   }
-  const hint = chained
-    ? `Cadena de ${K}: cada botón abre la siguiente puerta. Colócate en orden con tus ecos.`
-    : `Manda un eco a cada botón (${K}) para abrir las puertas, y cruza con tu último yo.`;
-  return {name:`Nivel ${n}`, par:K+1, hint, R,C,wall,bId,dId,spawn,exit,buttons,doors, gen:true, chained};
+  const hint = chained ? t("h_genChained",{k:K}) : t("h_genFree",{k:K});
+  return {name:`${t("lvlNameFallback")} ${n}`, par:K+1, hint, R,C,wall,bId,dId,spawn,exit,buttons,doors, gen:true, chained};
 }
 
 // alcanzables desde el inicio dado un conjunto de puertas abiertas (por id)
@@ -631,6 +869,7 @@ let muted = localStorage.getItem("ecos_muted")==="1";
 const screens=document.querySelectorAll(".screen");
 function go(id){
   // al navegar, cierra cualquier overlay abierto (victoria, código)
+  if(id!=="game") gameplayStop();   // portal: el jugador deja de jugar activamente
   document.querySelectorAll(".overlay.active").forEach(o=>o.classList.remove("active"));
   screens.forEach(s=>s.classList.toggle("active", s.id===id));
   if(id==="levels") buildGrid();
@@ -644,11 +883,12 @@ document.getElementById("btnContinue").addEventListener("click", ()=> startLevel
 
 function firstUnsolved(){ for(let i=0;i<TOTAL_LEVELS;i++){ if(!(progress[i]&&progress[i].done)) return i; } return TOTAL_LEVELS-1; }
 
-const WORLDS=[ [0,"Tutorial"], [6,"Aprendiz"], [30,"Engranajes"], [60,"Relojero"], [95,"Maestro del tiempo"], [130,"Leyenda"], [BOX_START,"📦 Cajas (bonus)"] ];
-const WORLD_GATE={ "Relojero":30, "Maestro del tiempo":90, "Leyenda":180 }; // ⭐ necesarias para entrar
-function worldLabel(i){ let lbl=""; for(const [start,name] of WORLDS){ if(i>=start) lbl=name; } return lbl; }
-function worldStart(name){ for(const [s,n] of WORLDS) if(n===name) return s; return 0; }
-function gateNeed(i){ const wl=worldLabel(i); return i===worldStart(wl) ? (WORLD_GATE[wl]||0) : 0; }
+const WORLDS=[ [0,"tutorial"], [6,"apprentice"], [30,"gears"], [60,"clock"], [95,"master"], [130,"legend"], [BOX_START,"boxes"] ];
+const WORLD_GATE={ clock:30, master:90, legend:180 }; // ⭐ necesarias para entrar
+function worldId(i){ let id=""; for(const [start,wid] of WORLDS){ if(i>=start) id=wid; } return id; }
+function worldName(id){ return t("w_"+id); }
+function worldStart(id){ for(const [s,wid] of WORLDS) if(wid===id) return s; return 0; }
+function gateNeed(i){ const wl=worldId(i); return i===worldStart(wl) ? (WORLD_GATE[wl]||0) : 0; }
 function isUnlocked(i){
   if(i===0) return true;
   if(i>=BOX_START){ // mundo Cajas: bonus disponible tras el tutorial; dentro, secuencial
@@ -669,11 +909,11 @@ const lvlGrid=document.getElementById("lvlGrid");
 function buildGrid(){
   lvlGrid.innerHTML=""; const cur=firstPlayable(); let lastWorld="";
   for(let i=0;i<TOTAL_LEVELS;i++){
-    const wl=worldLabel(i);
+    const wl=worldId(i);
     if(wl!==lastWorld){
       const h=document.createElement("div"); h.className="worldhdr";
-      const need=gateNeed(worldStart(wl)); const have=totalStars();
-      h.textContent = (need>0 && have<need) ? `◆ ${wl}  🔒 ${have}/${need}⭐` : "◆ "+wl;
+      const need=gateNeed(worldStart(wl)); const have=totalStars(); const nm=worldName(wl);
+      h.textContent = (need>0 && have<need) ? `◆ ${nm}  ${t("gateLocked",{have,need})}` : "◆ "+nm;
       lvlGrid.appendChild(h); lastWorld=wl;
     }
     const p=progress[i]; const locked=!isUnlocked(i);
@@ -701,15 +941,16 @@ function startGame(lv, opts){
       logical:[{...lv.spawn}], display:[{r:lv.spawn.r,c:lv.spawn.c}],
       faces:["D"], flash:0, coachStage:0, pressedOnce:false,
       hintShown:false, hintOn:false, hintPath:null };
-  const title = opts.title || (lv.gen ? `Nivel ${G.idx+1}` : (G.idx>=0 ? `${G.idx+1}. ${nameFor(G.idx)}` : "Nivel"));
+  const title = opts.title || (lv.gen ? `${t("lvlNameFallback")} ${G.idx+1}` : (G.idx>=0 ? `${G.idx+1}. ${nameFor(G.idx)}` : t("lvlNameFallback")));
   document.getElementById("lvlName").textContent = title;
   document.getElementById("hudPar").textContent = ` /${lv.par}`;
   setEchoPulse(false);
   go("game"); resize(); refreshLogical(true); updateHUD(); setHint(lv.hint, false);
+  gameplayStart();   // portal: el jugador empieza a jugar
 }
 function nameFor(idx){
-  if(idx>=BOX_START) return ["Empuja","Caja y botón","El rodeo","Doble carga","Almacén"][idx-BOX_START]||"Cajas";
-  return ["Primeros pasos","Mantén la puerta","Sin salida","Dos cerrojos","Dominó","Tres en raya"][idx]||("Nivel "+(idx+1));
+  if(idx>=BOX_START) return t("nameBox")[idx-BOX_START]||t("boxesShort");
+  return t("nameTut")[idx]||(t("lvlNameFallback")+" "+(idx+1));
 }
 
 function tileWall(r,c){ return r<0||c<0||r>=G.R||c>=G.C || G.lv.wall[r][c]; }
@@ -778,13 +1019,13 @@ function applyAction(a){
 }
 function newEcho(){
   if(!G||G.solved) return;
-  if(G.live.length===0){ toast("Muévete antes de crear un eco"); return; }
+  if(G.live.length===0){ toast(t("moveFirst")); return; }
   G.recordings.push(G.live); G.live=[]; G.turn=0;
   refreshLogical(true); sweep(); setEchoPulse(false);
   if(settings.anim){ G.flash=1; spawnEchoBurst(); }
   if(settings.vibrate && navigator.vibrate) try{navigator.vibrate(30);}catch(e){}
-  if(G.idx<=2) setHint("⟲ ECO creado. Mira su rastro de color: repetirá esos pasos. Ahora ve TÚ a cruzar la puerta.", false);
-  toast("Eco creado — ¡tu pasado te repite!");
+  if(G.idx<=2) setHint(t("echoCreatedHint"), false);
+  toast(t("echoCreated"));
   updateHUD();
 }
 function undo(){
@@ -795,7 +1036,7 @@ function undo(){
 }
 const restartCount={};
 function restart(){ if(!G) return; const id=G.idx; restartCount[id]=(restartCount[id]||0)+1; const many=restartCount[id]>=3;
-  startLevel(id); if(many && !G.hintShown && G.idx>=0) toast("¿Atascado? Pulsa 💡 para una pista"); }
+  startLevel(id); if(many && !G.hintShown && G.idx>=0) toast(t("stuckHint")); }
 function totalSteps(){ let s=G.live.length; for(const r of G.recordings) s+=r.length; return s; }
 function updateHUD(){ document.getElementById("hudEchoes").textContent=G.recordings.length; document.getElementById("hudSteps").textContent=totalSteps(); }
 
@@ -808,7 +1049,7 @@ function coachOnMove(){
     const me=G.logical[G.logical.length-1];
     if(buttonAt(me.r,me.c)>=0 && !G.pressedOnce){
       G.pressedOnce=true;
-      setHint("¡La puerta se abrió mientras pisas el botón! Pero si te marchas se cierra. Pulsa ⟲ para crear un eco que lo mantenga.", false);
+      setHint(t("coach1"), false);
       setEchoPulse(true);
     }
   }
@@ -816,7 +1057,7 @@ function coachOnMove(){
 
 /* ---- victoria ---- */
 function winLevel(){
-  G.solved=true; chord(); juiceWin();
+  G.solved=true; gameplayStop(); chord(); juiceWin();
   const timelines=G.recordings.length+1, steps=totalSteps();
   const stars = timelines<=G.lv.par ? 3 : (timelines<=G.lv.par+1 ? 2 : 1);
   if(G.idx>=0 && !G.custom){
@@ -833,7 +1074,7 @@ function winLevel(){
   document.getElementById("winSteps").textContent=steps;
   const isLast=G.idx>=TOTAL_LEVELS-1 && !G.custom;
   document.getElementById("btnNext").style.display=(G.custom||isLast)?"none":"flex";
-  document.getElementById("winTitle").textContent= G.custom?"¡Nivel superado!" : (isLast?"¡Has terminado ECOS! 🎉":"¡Nivel resuelto!");
+  document.getElementById("winTitle").textContent= G.custom?t("winCustom") : (isLast?t("winFinished"):t("winSolved"));
   G._res={idx:G.idx, timelines, steps, stars, daily:G.daily, custom:G.custom};
   setTimeout(()=>document.getElementById("winOverlay").classList.add("active"), 460);
 }
@@ -843,10 +1084,12 @@ document.getElementById("btnShare").addEventListener("click", share);
 function closeWin(){ document.getElementById("winOverlay").classList.remove("active"); }
 function shareText(r){
   const star="★".repeat(r.stars)+"☆".repeat(3-r.stars);
-  const head=r.custom?"ECOS · Nivel compartido":(r.daily?"ECOS · Reto del día":"ECOS · Nivel "+(r.idx+1));
-  return `${head}  ${star}\n${"⟲".repeat(r.timelines-1)||"—"}  ${r.timelines} ecos · ${r.steps} pasos\nJuega: ${CONFIG.GAME_URL}`;
+  const head=r.custom?t("shareCustom"):(r.daily?t("shareDaily"):t("shareLevel",{n:r.idx+1}));
+  const base=`${head}  ${star}\n${"⟲".repeat(r.timelines-1)||"—"}  ${t("shareStats",{e:r.timelines,s:r.steps})}`;
+  // en builds de portal NO enlazamos fuera de la plataforma (requisito de Poki/CrazyGames)
+  return IS_PORTAL ? base : base+`\n${t("sharePlay",{url:CONFIG.GAME_URL})}`;
 }
-function copyOrToast(txt){ if(navigator.clipboard) navigator.clipboard.writeText(txt).then(()=>toast("¡Copiado! 📋")).catch(()=>toast(txt)); else toast(txt); }
+function copyOrToast(txt){ if(navigator.clipboard) navigator.clipboard.writeText(txt).then(()=>toast(t("copied"))).catch(()=>toast(txt)); else toast(txt); }
 function share(){
   const r=G._res; if(!r) return; const txt=shareText(r);
   try{
@@ -860,10 +1103,10 @@ function share(){
     x.fillStyle="#04201c"; x.beginPath(); x.arc(W/2+74,616,15,0,7); x.arc(W/2+120,616,15,0,7); x.fill();
     // texto
     x.fillStyle="#2dd4bf"; x.font="900 150px system-ui,sans-serif"; x.fillText("ECOS",W/2,250);
-    x.fillStyle="#8b97a6"; x.font="38px system-ui,sans-serif"; x.fillText(r.custom?"Nivel compartido":(r.daily?"Reto del día":"Nivel "+(r.idx+1)),W/2,318);
+    x.fillStyle="#8b97a6"; x.font="38px system-ui,sans-serif"; x.fillText(r.custom?t("shareImgCustom"):(r.daily?t("shareImgDaily"):t("shareImgLevel",{n:r.idx+1})),W/2,318);
     x.fillStyle="#fbbf24"; x.font="128px system-ui,sans-serif"; x.fillText("★".repeat(r.stars)+"☆".repeat(3-r.stars),W/2,470);
-    x.fillStyle="#e6edf3"; x.font="bold 58px system-ui,sans-serif"; x.fillText(`${r.timelines} ecos · ${r.steps} pasos`,W/2,540);
-    x.fillStyle="#46566b"; x.font="34px system-ui,sans-serif"; x.fillText("cristiiaanlp.github.io/ecos",W/2,H-56);
+    x.fillStyle="#e6edf3"; x.font="bold 58px system-ui,sans-serif"; x.fillText(t("shareStats",{e:r.timelines,s:r.steps}),W/2,540);
+    x.fillStyle="#46566b"; x.font="34px system-ui,sans-serif"; x.fillText(IS_PORTAL?"ECOS":"cristiiaanlp.github.io/ecos",W/2,H-56);
     c.toBlob(b=>{
       if(b && navigator.canShare){ const file=new File([b],"ecos.png",{type:"image/png"});
         if(navigator.canShare({files:[file]})){ navigator.share({files:[file], text:txt}).catch(()=>copyOrToast(txt)); return; } }
@@ -874,7 +1117,7 @@ function share(){
 }
 document.getElementById("btnDaily").addEventListener("click", ()=>{
   const day=Math.floor(Date.now()/86400000); startLevel(day%TOTAL_LEVELS);
-  G.daily=true; document.getElementById("lvlName").textContent="📅 Reto del día";
+  G.daily=true; document.getElementById("lvlName").textContent=t("dailyTitle");
 });
 
 /* ===================== RENDER ===================== */
@@ -1027,11 +1270,11 @@ function drawSelf(p, live, i, face){
     ctx.fillStyle="#04201c"; ctx.beginPath();
     ctx.arc(x-Rr*.34+ex,y+ey,Rr*.1,0,7); ctx.arc(x+Rr*.34+ex,y+ey,Rr*.1,0,7); ctx.fill();
     // etiqueta TÚ
-    label(x, y-Rr-3, "TÚ", "#2dd4bf", "#04201c");
+    label(x, y-Rr-3, t("youLabel"), "#2dd4bf", "#04201c");
   } else {
     ctx.fillStyle="rgba(255,255,255,.55)"; ctx.beginPath();
     ctx.arc(x-Rr*.3,y-Rr*.05,Rr*.13,0,7); ctx.arc(x+Rr*.3,y-Rr*.05,Rr*.13,0,7); ctx.fill();
-    label(x, y-Rr-3, "eco "+(i+1), "rgba(120,150,180,.85)", "#0a0e13");
+    label(x, y-Rr-3, t("echoLabel",{n:i+1}), "rgba(120,150,180,.85)", "#0a0e13");
   }
 }
 function label(cx, by, text, bg, fg){
@@ -1090,12 +1333,12 @@ function solvedCount(){ let n=0; for(let i=0;i<TOTAL_LEVELS;i++) if(progress[i]&
 function totalStars(){ let s=0; for(let i=0;i<TOTAL_LEVELS;i++) if(progress[i]&&progress[i].done) s+=progress[i].stars||0; return s; }
 function updateMenu(){
   const u=firstPlayable();
-  document.getElementById("contLabel").textContent = (solvedCount()===0) ? "▶  Jugar" : "▶  Continuar · Nivel "+(u+1);
+  document.getElementById("contLabel").textContent = (solvedCount()===0) ? t("play") : t("continueLvl",{n:u+1});
   const sc=solvedCount();
   document.getElementById("progFill").style.width=(sc/TOTAL_LEVELS*100)+"%";
   const st=displayStreak();
   document.getElementById("menuProg").textContent=
-    `${sc}/${TOTAL_LEVELS} niveles · ⭐ ${totalStars()}/${TOTAL_LEVELS*3}` + (st>0?`  ·  🔥 ${st}`:"");
+    t("menuProg",{done:sc,total:TOTAL_LEVELS,stars:totalStars(),maxStars:TOTAL_LEVELS*3}) + (st>0?t("streakSuffix",{streak:st}):"");
 }
 
 const menuFx=document.getElementById("menuFx"); let menuCtx=null, menuW=0, menuH=0, mt=0, mfxHist=[];
@@ -1162,16 +1405,16 @@ function demoBlob(c,p,cell,live){ const x=p.c*cell+cell/2,y=p.r*cell+cell/2,R=ce
   c.fillStyle=live?"#04201c":"rgba(255,255,255,.55)"; c.beginPath();
   c.arc(x-R*.32,y-R*.05,R*.13,0,7); c.arc(x+R*.32,y-R*.05,R*.13,0,7); c.fill();
   c.font="bold "+Math.floor(cell*.22)+"px system-ui"; c.textAlign="center"; c.textBaseline="middle";
-  const tx=live?"TÚ":"eco", w=c.measureText(tx).width+8, h=cell*.3, by=y-R-3;
+  const tx=live?t("youLabel"):t("echoShort"), w=c.measureText(tx).width+8, h=cell*.3, by=y-R-3;
   c.fillStyle=live?"#2dd4bf":"rgba(120,150,180,.85)"; rrC(c,x-w/2,by-h,w,h,h/2); c.fill();
   c.fillStyle=live?"#04201c":"#0a0e13"; c.fillText(tx,x,by-h/2);
 }
 function drawDemo(){
   if(!demoCtx || !document.getElementById("howto").classList.contains("active")) return;
-  df=(df+1)%DLOOP; const t=df, c=demoCtx, cell=demoCellPx;
-  const lead = t<100 ? walkPos(pButton,10,16,t) : walkPos(pExit,140,16,t);
-  const ghost = t>=105 ? walkPos(pButton,105,16,t) : null;
-  const doorOpen = t<100 ? near(lead,3,1) : near(ghost,3,1);
+  df=(df+1)%DLOOP; const tm=df, c=demoCtx, cell=demoCellPx;
+  const lead = tm<100 ? walkPos(pButton,10,16,tm) : walkPos(pExit,140,16,tm);
+  const ghost = tm>=105 ? walkPos(pButton,105,16,tm) : null;
+  const doorOpen = tm<100 ? near(lead,3,1) : near(ghost,3,1);
   c.clearRect(0,0,demoCv.width,demoCv.height);
   for(let r=0;r<5;r++) for(let col=0;col<7;col++){ const x=col*cell,y=r*cell;
     if(dWall[r][col]){ c.fillStyle="#1b2330"; rrC(c,x+1,y+1,cell-2,cell-2,5); c.fill(); }
@@ -1193,13 +1436,13 @@ function drawDemo(){
   }
   if(ghost) demoBlob(c,ghost,cell,false);
   demoBlob(c,lead,cell,true);
-  if(t>=100&&t<114){ c.save();c.globalAlpha=(114-t)/14*.5;c.fillStyle="#2dd4bf";c.fillRect(0,0,demoCv.width,demoCv.height);c.restore(); }
+  if(tm>=100&&tm<114){ c.save();c.globalAlpha=(114-tm)/14*.5;c.fillStyle="#2dd4bf";c.fillRect(0,0,demoCv.width,demoCv.height);c.restore(); }
   let cap;
-  if(t<90) cap="1️⃣ Caminas hasta el botón → la puerta de su color se abre";
-  else if(t<100) cap="…pero si te marchas, la puerta se cierra otra vez 😕";
-  else if(t<172) cap="2️⃣ Pulsas ⟲ : tu recorrido se vuelve un ECO que repite tus pasos y mantiene el botón";
-  else if(t<214) cap="3️⃣ Mientras el eco pisa el botón, TÚ cruzas la puerta abierta →";
-  else cap="✅ ¡Llegas a la salida cooperando contigo mismo en el tiempo!";
+  if(tm<90) cap=t("demo1");
+  else if(tm<100) cap=t("demo2");
+  else if(tm<172) cap=t("demo3");
+  else if(tm<214) cap=t("demo4");
+  else cap=t("demo5");
   const el=document.getElementById("demoCap"); if(el && el.textContent!==cap) el.textContent=cap;
 }
 
@@ -1212,25 +1455,27 @@ function displayStreak(){ return meta.lastDay>=today()-1 ? meta.streak : 0; }
 function bumpStreak(){ const d=today(); if(meta.lastDay===d) return; meta.streak=(meta.lastDay===d-1)?meta.streak+1:1; meta.lastDay=d; saveMeta(); }
 
 const ACHS=[
-  {id:"first", ico:"👣", name:"Primer eco", desc:"Resuelve tu primer nivel.", t:()=>solvedCount()>=1},
-  {id:"ten", ico:"🧩", name:"Cogiendo el truco", desc:"Resuelve 10 niveles.", t:()=>solvedCount()>=10},
-  {id:"fifty", ico:"⚙️", name:"Relojero", desc:"Resuelve 50 niveles.", t:()=>solvedCount()>=50},
-  {id:"hundred", ico:"🌀", name:"Viajero del tiempo", desc:"Resuelve 100 niveles.", t:()=>solvedCount()>=100},
-  {id:"perfect", ico:"✨", name:"Impecable", desc:"Consigue 3★ en un nivel.", t:(c)=>c.stars===3},
-  {id:"nopain", ico:"🎯", name:"Sin titubeos", desc:"Resuelve un nivel sin usar deshacer.", t:(c)=>c.noUndo},
-  {id:"streak3", ico:"🔥", name:"Constante", desc:"Racha de 3 días en el reto diario.", t:()=>displayStreak()>=3},
-  {id:"creator", ico:"🛠️", name:"Arquitecto", desc:"Comparte un nivel que hayas creado.", t:(c)=>c.shared},
-  {id:"legend", ico:"👑", name:"Leyenda", desc:"Completa el nivel 150.", t:()=>progress[149]&&progress[149].done},
+  {id:"first", ico:"👣", chk:()=>solvedCount()>=1},
+  {id:"ten", ico:"🧩", chk:()=>solvedCount()>=10},
+  {id:"fifty", ico:"⚙️", chk:()=>solvedCount()>=50},
+  {id:"hundred", ico:"🌀", chk:()=>solvedCount()>=100},
+  {id:"perfect", ico:"✨", chk:(c)=>c.stars===3},
+  {id:"nopain", ico:"🎯", chk:(c)=>c.noUndo},
+  {id:"streak3", ico:"🔥", chk:()=>displayStreak()>=3},
+  {id:"creator", ico:"🛠️", chk:(c)=>c.shared},
+  {id:"legend", ico:"👑", chk:()=>progress[149]&&progress[149].done},
 ];
+function achName(id){ return t("ach_"+id+"_n"); }
+function achDesc(id){ return t("ach_"+id+"_d"); }
 function checkAchievements(stars, extra){
   const c=Object.assign({stars, noUndo:(!G||!G.usedUndo) && (G&&G.idx>=0)}, extra||{});
-  for(const a of ACHS){ if(!meta.ach[a.id] && a.t(c)){ meta.ach[a.id]=today(); saveMeta(); toast("🏆 Logro: "+a.name); } }
+  for(const a of ACHS){ if(!meta.ach[a.id] && a.chk(c)){ meta.ach[a.id]=today(); saveMeta(); toast(t("achToast",{name:achName(a.id)})); } }
 }
 function buildAchievements(){
   const el=document.getElementById("achList"); el.innerHTML="";
   for(const a of ACHS){ const got=!!meta.ach[a.id];
     const d=document.createElement("div"); d.className="ach"+(got?"":" locked");
-    d.innerHTML=`<div class="ico">${got?a.ico:"🔒"}</div><div class="meta"><b>${a.name}</b><span>${a.desc}</span></div>`;
+    d.innerHTML=`<div class="ico">${got?a.ico:"🔒"}</div><div class="meta"><b>${achName(a.id)}</b><span>${achDesc(a.id)}</span></div>`;
     el.appendChild(d);
   }
 }
@@ -1250,60 +1495,60 @@ function decodeLevel(code){
 function customLevel(rows){
   const p=parseRows(rows);
   if(!p.spawn || !p.exit) return null;
-  return Object.assign(p, {name:"Personalizado", par:p.buttons.length+1, hint:"Nivel personalizado", gen:false});
+  return Object.assign(p, {name:t("customName"), par:p.buttons.length+1, hint:t("customHint"), gen:false});
 }
 /* --- modal de códigos (pegar / compartir) --- */
 let codeActionFn=null;
 function showCodeModal(){ document.getElementById("codeOverlay").classList.add("active"); }
 function hideCodeModal(){ document.getElementById("codeOverlay").classList.remove("active"); }
 function openCodeEntry(){
-  document.getElementById("codeTitle").textContent="Jugar con código 🔗";
-  document.getElementById("codeHelp").textContent="Pega aquí el código que te han pasado:";
+  document.getElementById("codeTitle").textContent=t("codeEntryTitle");
+  document.getElementById("codeHelp").textContent=t("codeEntryHelp");
   const inp=document.getElementById("codeInput"); inp.value=""; inp.readOnly=false; inp.placeholder="ECOS1....";
   document.getElementById("codePaste").style.display="";
-  document.getElementById("codeAction").textContent="Jugar ▶";
+  document.getElementById("codeAction").textContent=t("codePlay");
   codeActionFn=playFromInput; showCodeModal(); setTimeout(()=>inp.focus(),60);
 }
 function openCodeShare(code){
-  document.getElementById("codeTitle").textContent="¡Nivel listo! 🎉";
-  document.getElementById("codeHelp").textContent="Copia este código y compártelo. Quien lo pegue jugará tu nivel:";
+  document.getElementById("codeTitle").textContent=t("codeShareTitle");
+  document.getElementById("codeHelp").textContent=t("codeShareHelp");
   const inp=document.getElementById("codeInput"); inp.value=code; inp.readOnly=true;
   document.getElementById("codePaste").style.display="none";
-  document.getElementById("codeAction").textContent="📋 Copiar código";
+  document.getElementById("codeAction").textContent=t("codeCopy");
   codeActionFn=()=>copyCode(code); showCodeModal(); setTimeout(()=>{inp.focus(); inp.select();},60);
 }
 function playFromInput(){
-  const code=document.getElementById("codeInput").value.trim(); if(!code){ toast("Pega un código primero"); return; }
-  try{ const lv=customLevel(decodeLevel(code)); if(!lv){ toast("El código no tiene inicio/salida"); return; }
-    if(!validate(lv)){ toast("Ese nivel no tiene solución 🤔"); return; }
-    hideCodeModal(); startGame(lv,{custom:true, title:"🔗 Nivel compartido"});
-  }catch(e){ toast("Código inválido"); }
+  const code=document.getElementById("codeInput").value.trim(); if(!code){ toast(t("pasteFirst")); return; }
+  try{ const lv=customLevel(decodeLevel(code)); if(!lv){ toast(t("noStartExit")); return; }
+    if(!validate(lv)){ toast(t("noSolution")); return; }
+    hideCodeModal(); startGame(lv,{custom:true, title:t("codeSharedTitle")});
+  }catch(e){ toast(t("invalidCode")); }
 }
 function copyCode(code){
-  if(navigator.clipboard){ navigator.clipboard.writeText(code).then(()=>toast("¡Copiado! 🔗")).catch(()=>fallbackCopy()); }
+  if(navigator.clipboard){ navigator.clipboard.writeText(code).then(()=>toast(t("copiedLink"))).catch(()=>fallbackCopy()); }
   else fallbackCopy();
-  function fallbackCopy(){ const inp=document.getElementById("codeInput"); inp.readOnly=false; inp.select(); try{document.execCommand("copy"); toast("¡Copiado! 🔗");}catch(e){} inp.readOnly=true; }
+  function fallbackCopy(){ const inp=document.getElementById("codeInput"); inp.readOnly=false; inp.select(); try{document.execCommand("copy"); toast(t("copiedLink"));}catch(e){} inp.readOnly=true; }
 }
 document.getElementById("btnCode").addEventListener("click", openCodeEntry);
 document.getElementById("codeClose").addEventListener("click", hideCodeModal);
 document.getElementById("codeAction").addEventListener("click", ()=>{ if(codeActionFn) codeActionFn(); });
 document.getElementById("codePaste").addEventListener("click", async ()=>{
-  try{ const t=await navigator.clipboard.readText(); document.getElementById("codeInput").value=t; document.getElementById("codeInput").focus(); }
-  catch(e){ toast("Pega el código a mano (Ctrl+V)"); }
+  try{ const txt=await navigator.clipboard.readText(); document.getElementById("codeInput").value=txt; document.getElementById("codeInput").focus(); }
+  catch(e){ toast(t("pasteManually")); }
 });
 document.getElementById("codeOverlay").addEventListener("click", e=>{ if(e.target.id==="codeOverlay") hideCodeModal(); });
 
 /* ===================== EDITOR ===================== */
 const ED_SIZES=[[7,9],[9,11],[11,13]]; let edSizeIx=1;
 let edR=9, edC=11, edCells=[], edTool="wall", edColor=0;
-const ED_TOOLS=[["wall","Muro"],["floor","Suelo"],["start","Inicio"],["exit","Salida"],["button","Botón"],["door","Puerta"],["box","📦 Caja"],["erase","Borrar"]];
+const ED_TOOLS=[["wall","edWall"],["floor","edFloor"],["start","edStart"],["exit","edExit"],["button","edButton"],["door","edDoor"],["box","edBox"],["erase","edErase"]];
 function edBlankGrid(){ edCells=[]; for(let r=0;r<edR;r++){ edCells[r]=[]; for(let c=0;c<edC;c++)
   edCells[r][c]=(r===0||c===0||r===edR-1||c===edC-1)?"#":"."; } }
 function edOpen(){ if(!edCells.length) edBlankGrid(); edBuildTools(); edRender(); }
 function edBuildTools(){
   const tw=document.getElementById("edTools"); tw.innerHTML="";
   ED_TOOLS.forEach(([id,label])=>{ const b=document.createElement("div");
-    b.className="edtool"+(edTool===id?" sel":""); b.textContent=label;
+    b.className="edtool"+(edTool===id?" sel":""); b.textContent=t(label);
     b.onclick=()=>{ edTool=id; edBuildTools(); }; tw.appendChild(b); });
   const cw=document.getElementById("edColors"); cw.innerHTML="";
   for(let k=0;k<6;k++){ const b=document.createElement("div");
@@ -1342,10 +1587,10 @@ function edRows(){ return edCells.map(row=>row.join("")); }
 document.getElementById("edSize").addEventListener("click", ()=>{ edSizeIx=(edSizeIx+1)%ED_SIZES.length; [edR,edC]=ED_SIZES[edSizeIx]; edBlankGrid(); edRender(); });
 document.getElementById("edClear").addEventListener("click", ()=>{ edBlankGrid(); edRender(); });
 function edCheck(){ const lv=customLevel(edRows());
-  if(!lv){ toast("Pon un Inicio 🙂 y una Salida 🟢"); return null; }
-  if(!validate(lv)){ toast("Aún no tiene solución: revisa botones y puertas 🤔"); return null; }
+  if(!lv){ toast(t("needStartExit")); return null; }
+  if(!validate(lv)){ toast(t("edNoSolution")); return null; }
   return lv; }
-document.getElementById("edPlay").addEventListener("click", ()=>{ const lv=edCheck(); if(lv) startGame(lv,{custom:true, title:"🛠️ Tu nivel"}); });
+document.getElementById("edPlay").addEventListener("click", ()=>{ const lv=edCheck(); if(lv) startGame(lv,{custom:true, title:t("edPlayTitle")}); });
 document.getElementById("edShare").addEventListener("click", ()=>{
   const lv=edCheck(); if(!lv) return; const code=encodeLevel(edRows());
   checkAchievements(0,{shared:true});
@@ -1358,8 +1603,8 @@ let settings=(()=>{ try{return Object.assign({music:false,vibrate:true,anim:true
 function saveSettings(){ try{localStorage.setItem(SET_KEY,JSON.stringify(settings));}catch(e){} applySettings(); }
 function applySettings(){ document.body.classList.toggle("noanim", !settings.anim); }
 applySettings();
-// retorno del pago de Stripe (Payment Link configurado para volver a GAME_URL?paid=1)
-try{ if(new URLSearchParams(location.search).get("paid")==="1"){ if(!settings.noAds){ settings.noAds=true; saveSettings(); toast("¡Gracias por tu compra! Anuncios eliminados 🙌"); } history.replaceState(null,"",location.pathname); } }catch(e){}
+// retorno del pago de Stripe (Payment Link configurado para volver a GAME_URL?paid=1) — solo build self
+try{ if(BUILD==="self" && new URLSearchParams(location.search).get("paid")==="1"){ if(!settings.noAds){ settings.noAds=true; saveSettings(); toast(t("thanksRemoveAds")); } history.replaceState(null,"",location.pathname); } }catch(e){}
 
 const fxCanvas=document.getElementById("fxCanvas"); let fxctx=null, confetti=[];
 function fxSize(){ const dpr=Math.min(window.devicePixelRatio||1,2); fxCanvas.width=innerWidth*dpr; fxCanvas.height=innerHeight*dpr; fxctx=fxCanvas.getContext("2d"); fxctx.setTransform(dpr,0,0,dpr,0,0); }
@@ -1394,29 +1639,39 @@ window.addEventListener("focus", ()=>{ if(settings.music && !muted) startMusic()
 /* panel de ajustes */
 function buildSettings(){
   const rows=[
-    {label:"🔊 Sonido", get:()=>!muted, set:v=>{ muted=!v; localStorage.setItem("ecos_muted",muted?"1":"0"); muteBtn.textContent=muted?"🔇":"🔊"; updateMusic(); }},
-    {label:"🎵 Música", get:()=>settings.music, set:v=>{ settings.music=v; saveSettings(); updateMusic(); }},
-    {label:"📳 Vibración", get:()=>settings.vibrate, set:v=>{ settings.vibrate=v; saveSettings(); }},
-    {label:"✨ Animaciones", get:()=>settings.anim, set:v=>{ settings.anim=v; saveSettings(); }},
+    {label:t("setSound"), get:()=>!muted, set:v=>{ muted=!v; localStorage.setItem("ecos_muted",muted?"1":"0"); muteBtn.textContent=muted?"🔇":"🔊"; updateMusic(); }},
+    {label:t("setMusic"), get:()=>settings.music, set:v=>{ settings.music=v; saveSettings(); updateMusic(); }},
+    {label:t("setVibrate"), get:()=>settings.vibrate, set:v=>{ settings.vibrate=v; saveSettings(); }},
+    {label:t("setAnim"), get:()=>settings.anim, set:v=>{ settings.anim=v; saveSettings(); }},
   ];
   const el=document.getElementById("setList"); el.innerHTML="";
   for(const r of rows){ const row=document.createElement("div"); row.className="setrow";
     const sw=document.createElement("button"); sw.className="swbtn"+(r.get()?" on":"");
     sw.onclick=()=>{ r.set(!r.get()); sw.classList.toggle("on", r.get()); };
     row.innerHTML=`<span>${r.label}</span>`; row.appendChild(sw); el.appendChild(row); }
-  // quitar anuncios
-  const ad=document.createElement("div"); ad.className="setrow";
-  if(settings.noAds){ ad.innerHTML="<span>🚫 Anuncios eliminados ✅</span>"; }
-  else { ad.innerHTML="<span>🚫 Quitar anuncios</span>";
-    const b=document.createElement("button"); b.className="btn"; b.style.cssText="padding:8px 14px;min-width:auto;flex:0 0 auto"; b.textContent="1,99 €";
-    b.onclick=purchaseRemoveAds; ad.appendChild(b); }
-  el.appendChild(ad);
+  // idioma (ES / EN)
+  const lr=document.createElement("div"); lr.className="setrow";
+  lr.innerHTML=`<span>${t("setLangLbl")}</span>`;
+  const langWrap=document.createElement("div"); langWrap.style.cssText="display:flex;gap:6px;flex:0 0 auto";
+  [["es","ES"],["en","EN"]].forEach(([code,lbl])=>{ const b=document.createElement("button");
+    b.className="btn"; b.style.cssText="padding:7px 13px;min-width:auto;flex:0 0 auto"+(LANG===code?";background:var(--teal);color:#04201c;border:none":"");
+    b.textContent=lbl; b.onclick=()=>{ if(LANG!==code) setLang(code); }; langWrap.appendChild(b); });
+  lr.appendChild(langWrap); el.appendChild(lr);
+  // quitar anuncios (SOLO build "self" — los portales gestionan su propia publicidad)
+  if(BUILD==="self"){
+    const ad=document.createElement("div"); ad.className="setrow";
+    if(settings.noAds){ ad.innerHTML=`<span>${t("removeAdsDone")}</span>`; }
+    else { ad.innerHTML=`<span>${t("removeAds")}</span>`;
+      const b=document.createElement("button"); b.className="btn"; b.style.cssText="padding:8px 14px;min-width:auto;flex:0 0 auto"; b.textContent="1,99 €";
+      b.onclick=purchaseRemoveAds; ad.appendChild(b); }
+    el.appendChild(ad);
+  }
 }
 document.getElementById("btnSettings").addEventListener("click", ()=>{ buildSettings(); document.getElementById("settingsOverlay").classList.add("active"); });
 document.getElementById("setClose").addEventListener("click", ()=>document.getElementById("settingsOverlay").classList.remove("active"));
 document.getElementById("settingsOverlay").addEventListener("click", e=>{ if(e.target.id==="settingsOverlay") e.currentTarget.classList.remove("active"); });
 document.getElementById("setReset").addEventListener("click", ()=>{
-  if(confirm("¿Borrar todo tu progreso, estrellas y logros?")){ progress={}; saveProgress(); meta={streak:0,lastDay:0,ach:{}}; saveMeta(); toast("Progreso reiniciado"); updateMenu(); buildSettings(); }
+  if(confirm(t("resetConfirm"))){ progress={}; saveProgress(); meta={streak:0,lastDay:0,ach:{}}; saveMeta(); toast(t("progressReset")); updateMenu(); buildSettings(); }
 });
 
 /* ===================== PISTA (desbloqueada con anuncio) ===================== */
@@ -1435,10 +1690,10 @@ function solveRoute(lv){ // ruta inicio→salida con TODAS las puertas abiertas 
 }
 function hintText(lv){
   const need=lv.par-1;
-  if(lv.boxes&&lv.boxes.length) return "💡 Empuja las cajas 📦 sobre los botones para abrir las puertas y sigue la ruta dorada hasta la salida.";
-  if(lv.chained) return `💡 Encadénalos: pisa primero el botón más cercano al inicio y, eco a eco, ve abriendo la puerta siguiente en orden. Cruza al final por la ruta dorada (~${need} ecos).`;
-  if(need<=0) return "💡 Solo tienes que llegar a la salida siguiendo la ruta dorada.";
-  return `💡 Manda un eco a cada botón (${lv.buttons.length}) para mantener abiertas las puertas y cruza con tu último yo por la ruta dorada (~${need} ecos).`;
+  if(lv.boxes&&lv.boxes.length) return t("hintBoxes");
+  if(lv.chained) return t("hintChained",{n:need});
+  if(need<=0) return t("hintSimpleNone");
+  return t("hintSimple",{b:lv.buttons.length,n:need});
 }
 function revealHint(){ G.hintShown=true; G.hintOn=true; G.hintPath=solveRoute(G.lv); setHint(hintText(G.lv), false); }
 function openHint(){
@@ -1446,56 +1701,111 @@ function openHint(){
   if(G.hintShown){ // ya desbloqueada en este nivel: alterna mostrar/ocultar la ruta
     G.hintOn=!G.hintOn; setHint(G.hintOn?hintText(G.lv):G.lv.hint, false); return;
   }
+  if(IS_PORTAL){ // portal: anuncio recompensado de su SDK (con fallback a pista directa si no hay anuncio)
+    portalRewarded(()=>{ revealHint(); toast(t("hintUnlocked")); }, ()=>{ revealHint(); });
+    return;
+  }
   if(settings.noAds){ revealHint(); return; } // compró "sin anuncios" → pista directa, gratis
   document.getElementById("adIntro").style.display=""; document.getElementById("adPlaying").style.display="none";
   document.getElementById("adOverlay").classList.add("active");
 }
-/* ╔═══════════════════════════════════════════════════════════════════════════╗
-   ║  CONFIGURACIÓN — PEGA AQUÍ TUS CREDENCIALES CUANDO LAS TENGAS.              ║
-   ║  Mientras estén vacías, todo funciona en modo "simulado" (sin cobrar).     ║
-   ║                                                                            ║
-   ║  • ADSENSE_CLIENT: tu ID de Google AdSense (activa "H5 Games Ads").        ║
-   ║      Formato "ca-pub-XXXXXXXXXXXXXXXX". Vacío "" = anuncios simulados.      ║
-   ║  • STRIPE_PAYMENT_LINK: enlace de pago de Stripe para "quitar anuncios".   ║
-   ║      Créalo en Stripe → Payment Links, y en "Tras el pago" redirige a      ║
-   ║      GAME_URL + "?paid=1". Vacío "" = compra simulada.                      ║
-   ║  • GAME_URL: la URL pública del juego (se usa al compartir).               ║
-   ╚═══════════════════════════════════════════════════════════════════════════╝ */
-const CONFIG = {
-  ADSENSE_CLIENT:      "",   // p.ej. "ca-pub-1234567890123456"
-  STRIPE_PAYMENT_LINK: "",   // p.ej. "https://buy.stripe.com/xxxxxxxx"
-  GAME_URL:            "https://cristiiaanlp.github.io/ecos/"
-};
-const ADSENSE_CLIENT = CONFIG.ADSENSE_CLIENT; // alias interno
+/* ╔════════════════════════════════════════════════════════════════════════════╗
+   ║  MONETIZACIÓN — adaptada al build (ver CONFIG arriba del script).            ║
+   ║    • self        → AdSense H5 (anuncios) + Stripe (quitar anuncios).         ║
+   ║    • poki        → Poki SDK (sus anuncios). Sin AdSense ni Stripe.           ║
+   ║    • crazygames  → CrazyGames SDK (sus anuncios). Sin AdSense ni Stripe.     ║
+   ║  Si el SDK no carga (sin red, en local…), todo cae a un modo "simulado"      ║
+   ║  que no rompe el juego.                                                      ║
+   ╚════════════════════════════════════════════════════════════════════════════╝ */
 
+/* ---------- SDK del portal (carga diferida) ---------- */
+let portalSDK=null;
+function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement("script"); s.async=true; s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
+function initPortal(){
+  if(BUILD==="poki"){
+    loadScript("https://game-cdn.poki.com/scripts/v2/poki-sdk.js").then(()=>{
+      if(typeof PokiSDK==="undefined") return; portalSDK=PokiSDK;
+      const ready=()=>{ try{ PokiSDK.gameLoadingFinished(); }catch(e){} };
+      try{ PokiSDK.init().then(ready).catch(ready); }catch(e){ ready(); }
+    }).catch(()=>{});
+  } else if(BUILD==="crazygames"){
+    loadScript("https://sdk.crazygames.com/crazygames-sdk-v3.js").then(()=>{
+      const sdk=window.CrazyGames && window.CrazyGames.SDK; if(!sdk) return; portalSDK=sdk;
+      const done=()=>{ try{ if(sdk.game && sdk.game.loadingStop) sdk.game.loadingStop(); }catch(e){} };
+      try{ const r=sdk.init && sdk.init(); if(r && r.then) r.then(done).catch(done); else done(); }catch(e){ done(); }
+    }).catch(()=>{});
+  }
+}
+
+/* ---------- AdSense (SOLO build self) ---------- */
+const ADSENSE_CLIENT = CONFIG.ADSENSE_CLIENT;
 let adBreakFn=null, adTimer=null;
-function initAds(){
-  if(!ADSENSE_CLIENT) return; // sin ID → modo simulado
+function initAdsense(){
+  if(BUILD!=="self" || !ADSENSE_CLIENT) return; // sin ID → modo simulado
   const s=document.createElement("script");
   s.async=true; s.crossOrigin="anonymous";
   s.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="+ADSENSE_CLIENT;
-  s.onerror=()=>{ adBreakFn=null; }; // si no carga (sin red), seguimos con el simulado
+  s.onerror=()=>{ adBreakFn=null; };
   document.head.appendChild(s);
   window.adsbygoogle=window.adsbygoogle||[];
   adBreakFn=(o)=>{ (window.adsbygoogle=window.adsbygoogle||[]).push(o); };
-  try{ adBreakFn({ preloadAdBreaks:"on", sound:"on" }); }catch(e){ adBreakFn=null; } // adConfig
+  try{ adBreakFn({ preloadAdBreaks:"on", sound:"on" }); }catch(e){ adBreakFn=null; }
 }
-initAds();
+if(IS_PORTAL) initPortal(); else initAdsense();
 
+/* ---------- gameplayStart / gameplayStop (lo requieren los portales) ---------- */
+let gameplayActive=false;
+function gameplayStart(){
+  if(!IS_PORTAL || gameplayActive || !portalSDK) return; gameplayActive=true;
+  try{ if(BUILD==="poki") portalSDK.gameplayStart();
+       else if(portalSDK.game) portalSDK.game.gameplayStart(); }catch(e){}
+}
+function gameplayStop(){
+  if(!IS_PORTAL || !gameplayActive || !portalSDK) return; gameplayActive=false;
+  try{ if(BUILD==="poki") portalSDK.gameplayStop();
+       else if(portalSDK.game) portalSDK.game.gameplayStop(); }catch(e){}
+}
+
+/* ---------- anuncio recompensado del portal (pista) ---------- */
+function portalRewarded(onOk, onFail){
+  if(BUILD==="poki" && portalSDK){
+    gameplayStop();
+    try{ portalSDK.rewardedBreak().then(ok=>{ gameplayStart(); ok?onOk():(onFail&&onFail()); }).catch(()=>{ gameplayStart(); onFail&&onFail(); }); }
+    catch(e){ gameplayStart(); onFail&&onFail(); }
+    return;
+  }
+  if(BUILD==="crazygames" && portalSDK && portalSDK.ad){
+    gameplayStop();
+    try{ portalSDK.ad.requestAd("rewarded", { adFinished:()=>{ gameplayStart(); onOk(); }, adError:()=>{ gameplayStart(); onFail&&onFail(); } }); }
+    catch(e){ gameplayStart(); onFail&&onFail(); }
+    return;
+  }
+  onFail&&onFail();
+}
+/* ---------- intersticial del portal (entre niveles) ---------- */
+function portalInterstitial(done){
+  if(BUILD==="poki" && portalSDK){ gameplayStop();
+    try{ portalSDK.commercialBreak().then(()=>{ gameplayStart(); done(); }).catch(()=>{ gameplayStart(); done(); }); }catch(e){ gameplayStart(); done(); } return; }
+  if(BUILD==="crazygames" && portalSDK && portalSDK.ad){ gameplayStop();
+    try{ portalSDK.ad.requestAd("midgame", { adFinished:()=>{ gameplayStart(); done(); }, adError:()=>{ gameplayStart(); done(); } }); }catch(e){ gameplayStart(); done(); } return; }
+  done();
+}
+
+/* ---------- overlay de anuncio del build "self" (AdSense + simulado) ---------- */
 function closeAd(){ clearInterval(adTimer); adTimer=null; document.getElementById("adOverlay").classList.remove("active"); }
 function playAd(){
   document.getElementById("adIntro").style.display="none"; document.getElementById("adPlaying").style.display="";
   const claim=document.getElementById("adClaim"), cnt=document.getElementById("adCount");
 
-  // ===== ANUNCIO REAL (AdSense H5) — se usa solo si hay ID configurado =====
+  // ===== ANUNCIO REAL (AdSense H5) — solo si hay ID configurado =====
   if(adBreakFn && ADSENSE_CLIENT){
-    cnt.textContent="Cargando anuncio…"; claim.style.display="none";
+    cnt.textContent=t("adLoading"); claim.style.display="none";
     let rewarded=false;
     try{
       adBreakFn({
         type:"reward", name:"pista",
-        beforeReward:(showAdFn)=>{ cnt.textContent="Anuncio listo, reprodúcelo 👇"; showAdFn(); },
-        adViewed:()=>{ rewarded=true; onReward(); },          // ✅ lo vio entero → pista
+        beforeReward:(showAdFn)=>{ cnt.textContent=t("adPlayNow"); showAdFn(); },
+        adViewed:()=>{ rewarded=true; onReward(); },
         adDismissed:()=>{ /* lo cerró antes: sin pista */ },
         adBreakDone:()=>{ claim.style.display=""; if(!rewarded) closeAd(); }
       });
@@ -1505,36 +1815,37 @@ function playAd(){
 
   // ===== ANUNCIO SIMULADO (desarrollo / sin ID) =====
   claim.style.display=""; claim.disabled=true;
-  let t=5; cnt.textContent="Tu pista en "+t+"…"; clearInterval(adTimer);
-  adTimer=setInterval(()=>{ t--; if(t>0){ cnt.textContent="Tu pista en "+t+"…"; }
-    else { clearInterval(adTimer); adTimer=null; cnt.textContent="¡Listo! Reclama tu pista 👇"; claim.disabled=false; } }, 1000);
+  let n=5; cnt.textContent=t("adCountdown",{n}); clearInterval(adTimer);
+  adTimer=setInterval(()=>{ n--; if(n>0){ cnt.textContent=t("adCountdown",{n}); }
+    else { clearInterval(adTimer); adTimer=null; cnt.textContent=t("adReady"); claim.disabled=false; } }, 1000);
 }
-function onReward(){ clearInterval(adTimer); adTimer=null; document.getElementById("adOverlay").classList.remove("active"); revealHint(); toast("Pista desbloqueada 💡"); }
+function onReward(){ clearInterval(adTimer); adTimer=null; document.getElementById("adOverlay").classList.remove("active"); revealHint(); toast(t("hintUnlocked")); }
 
-/* ----- intersticial entre niveles + "quitar anuncios" ----- */
+/* ----- intersticial entre niveles ----- */
 let levelsCleared=0, interTimer=null; const INTERSTITIAL_EVERY=3;
 function playInterstitial(done){
   if(settings.noAds){ done(); return; }
-  // ANUNCIO REAL (AdSense H5): anuncio de transición entre niveles
   if(adBreakFn && ADSENSE_CLIENT){ try{ adBreakFn({ type:"next", name:"entre-niveles", adBreakDone:()=>done() }); return; }catch(e){} }
   // simulado:
   const ov=document.getElementById("interOverlay"), cnt=document.getElementById("interCount"), go2=document.getElementById("interGo");
-  go2.disabled=true; ov.classList.add("active"); let t=4; cnt.textContent="Continúas en "+t+"…"; clearInterval(interTimer);
-  interTimer=setInterval(()=>{ t--; if(t>0) cnt.textContent="Continúas en "+t+"…";
-    else { clearInterval(interTimer); interTimer=null; cnt.textContent="¡Gracias por tu apoyo! 🙌"; go2.disabled=false; } }, 1000);
+  go2.disabled=true; ov.classList.add("active"); let n=4; cnt.textContent=t("interCountdown",{n}); clearInterval(interTimer);
+  interTimer=setInterval(()=>{ n--; if(n>0) cnt.textContent=t("interCountdown",{n});
+    else { clearInterval(interTimer); interTimer=null; cnt.textContent=t("interThanks"); go2.disabled=false; } }, 1000);
   go2.onclick=()=>{ clearInterval(interTimer); interTimer=null; ov.classList.remove("active"); done(); };
 }
 function nextLevelWithAd(){
   const n=G.idx+1, advance=()=>{ if(n<TOTAL_LEVELS) startLevel(n); else go("levels"); };
-  if(!settings.noAds && levelsCleared>0 && levelsCleared%INTERSTITIAL_EVERY===0) playInterstitial(advance); else advance();
+  const due = levelsCleared>0 && levelsCleared%INTERSTITIAL_EVERY===0;
+  if(IS_PORTAL){ if(due) portalInterstitial(advance); else advance(); return; }
+  if(!settings.noAds && due) playInterstitial(advance); else advance();
 }
 function purchaseRemoveAds(){
   // COMPRA REAL: si hay Payment Link de Stripe, redirige a la pasarela.
   // (Stripe debe volver a GAME_URL?paid=1 tras el pago; eso lo lee el bloque de arranque.)
   if(CONFIG.STRIPE_PAYMENT_LINK){ try{ location.href=CONFIG.STRIPE_PAYMENT_LINK; return; }catch(e){} }
   // COMPRA SIMULADA (sin credenciales todavía):
-  if(confirm("Quitar anuncios para siempre por 1,99 € (compra SIMULADA en esta versión).")){
-    settings.noAds=true; saveSettings(); toast("¡Gracias! Anuncios eliminados 🙌");
+  if(confirm(t("purchaseConfirm"))){
+    settings.noAds=true; saveSettings(); toast(t("thanksRemoveAds2"));
     if(document.getElementById("settingsOverlay").classList.contains("active")) buildSettings();
   }
 }
@@ -1544,7 +1855,7 @@ document.getElementById("adClaim").addEventListener("click", onReward);
 document.getElementById("adCancel").addEventListener("click", ()=>document.getElementById("adOverlay").classList.remove("active"));
 document.getElementById("adOverlay").addEventListener("click", e=>{ if(e.target.id==="adOverlay"){ clearInterval(adTimer); adTimer=null; e.currentTarget.classList.remove("active"); } });
 
-buildGrid(); updateMenu(); resizeFx("menu");
+applyI18n(); buildGrid(); updateMenu(); resizeFx("menu");
 </script>
 </body>
 </html>
